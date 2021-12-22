@@ -1,5 +1,11 @@
-NAME =
+NAME =megaphone
 
-all:
-	clang++ tests.cpp ../days/day00/*.cpp -I.. -I../days/day00 -o $(NAME)
+all: test-class
 
+test-class:
+	clang++ -std=c++98 test_class_main.cpp Test.class.cpp -o test
+
+clean:
+	rm -rf test
+
+re: clean all
