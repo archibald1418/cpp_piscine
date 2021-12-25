@@ -14,31 +14,45 @@ class Contact
         string phone_number;
         string darkest_secret;
         
+        // Contact(); // constructor can be private so the object is closed for copying
+        
     public:
         Contact(string first_name,
                 string last_name,
                 string nickname,
                 string phone_number,
                 string darkest_secret); // All these get prompted from the user
+        Contact(){
+            first_name = "",
+            last_name = "",
+            nickname = "",
+            phone_number = "",
+            darkest_secret = "";};
         ~Contact();
 
-        string get_phone_number(string phone_number)const;
-        void set_phone_number(string phone_number);
-
-        string get_first_name(string first_name)const;
-        void set_first_name(string first_name);
+        bool    is_empty();
+        bool    is_init();
+        void    update_contact(Contact &contact);
+        string get_first_name()const;
+        string get_last_name()const;
+        string get_nickname()const;
+        string get_phone_number()const;
+        string get_darkest_secret()const;
         
-        string get_last_name(string last_name)const;
-        void set_last_name(string last_name);
-
-        void set_nickname(string nickname);
-        string get_nickname(string nickname)const;
-
-        void set_darkest_secret(string darkest_secret);
-        string get_darkest_secret(string darkest_secret)const;
-
-        //FIXME: see settings.json & cpp.json snippets
         
-}
+        
+        
+        
+        
+
+        /*
+        Each column must be 10 chars wide, right aligned and separated by a ’|’
+            character. 
+        Any output longer than the columns’ width is truncated and the
+            last displayable character is replaced by a dot (’.’)
+        */
+        
+
+};
 
 #endif

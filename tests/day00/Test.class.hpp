@@ -16,16 +16,16 @@ class Witch {
 		void	spell_damage(void); // Non-member function (depends on a static variable)
 		int	gethp(void);
 		int	getSpellsEnvoked(void);
-		// Static methods 
+
 
 		
-	
+		
 	private:
 		// Not visible from outside,
 		// visible only from within a class
 		int		_lol;
 		void	_kek(void);
-		static int	_nbInstances; // Static 
+		static int	_nbInstances; // Static attribute
 		
 		int	hp;
 		int	spells_envoked;
