@@ -42,8 +42,6 @@ class Contact
         
         
         
-        
-        
 
         /*
         Each column must be 10 chars wide, right aligned and separated by a ’|’

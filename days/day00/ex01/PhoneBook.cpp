@@ -79,6 +79,7 @@ void    PhoneBook::show_contacts()
         show_contact(i);
         std::cout << std::endl;
     }
+    delineate();
     std::cout << std::endl;
 }
 
