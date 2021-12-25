@@ -1,7 +1,5 @@
 #ifndef CONTACT_H
 # define CONTACT_H
-#include <string>
-#include <iostream>
 
 typedef std::string string;
 
@@ -33,11 +31,11 @@ class Contact
         bool    is_empty();
         bool    is_init();
         void    update_contact(Contact &contact);
-        string get_first_name()const;
-        string get_last_name()const;
-        string get_nickname()const;
-        string get_phone_number()const;
-        string get_darkest_secret()const;
+        string  get_first_name()const;
+        string  get_last_name()const;
+        string  get_nickname()const;
+        string  get_phone_number()const;
+        string  get_darkest_secret()const;
         
         
         

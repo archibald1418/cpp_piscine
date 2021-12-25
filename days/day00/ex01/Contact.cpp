@@ -1,4 +1,6 @@
 #include "Contact.hpp"
+#include <iostream>
+#include <iomanip>
 
 
 Contact::Contact(string first_name,
