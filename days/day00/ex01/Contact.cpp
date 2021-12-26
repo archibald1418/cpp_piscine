@@ -19,11 +19,11 @@ Contact::Contact(string first_name,
 bool    Contact::is_empty()
 {
     return (
-        this->first_name == "" && \
-        this->last_name == "" && \
-        this->nickname == "" && \
-        this->phone_number == "" && \
-        this->darkest_secret == ""
+        this->first_name.empty() && \
+        this->last_name.empty() && \
+        this->nickname.empty() && \
+        this->phone_number.empty() && \
+        this->darkest_secret.empty()
     );
 }
 

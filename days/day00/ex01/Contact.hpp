@@ -1,5 +1,6 @@
 #ifndef CONTACT_H
 # define CONTACT_H
+#include <string>
 
 typedef std::string string;
 
