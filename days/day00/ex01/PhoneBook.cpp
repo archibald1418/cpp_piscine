@@ -6,12 +6,11 @@
 PhoneBook::PhoneBook()
 {
     this->contacts.top = 0;
-    
 }
 
 PhoneBook::~PhoneBook()
 {
-    std::cout << "Phone Book is destroted" << std::endl;
+    // std::cout << "Phone Book is destroted" << std::endl;
 }
 
 void    PhoneBook::exit()
@@ -48,7 +47,7 @@ void   PhoneBook::show_contact(int i)
 
     // Show index
     std::cout << std::setw(10);
-    std::cout << i;
+    std::cout << i << '|';
     
     Contact contact = this->contacts.list[i];
     show_field(contact.get_first_name());
@@ -63,11 +62,18 @@ void    PhoneBook::show_field(string field)
     while ((i < field.length()) && i < (FIELD_WIDTH - 1))
     {
         std::cout << field[i];
+        
         i++;
     }
-    std::cout << '.';
+    if (i == FIELD_WIDTH - 1)
+        std::cout << '.';
+    std::cout << '|';
 }
 
+void    PhoneBook::show_last_contact()
+{
+    this->show_contact(this->contacts.top);
+}
 
 void    PhoneBook::show_contacts()
 {

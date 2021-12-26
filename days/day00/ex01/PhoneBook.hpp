@@ -30,6 +30,7 @@ public:
     void    search();
     void    show_contact(int i);
     void    show_contacts();
+    void    show_last_contact();
     // search
 
         

@@ -18,6 +18,9 @@ test-class:
 test-contact-class:
 	clang++ -g -std=c++98 test_contact.cpp $(CONTACT_CLASS) -I$(INCLUDE) $(TOGGLE_READLINE) -o test
 
+test-phonebook-class:
+	clang++ -g -std=c++98 test_phonebook.cpp $(PHONEBOOK_CLASS) $(CONTACT_CLASS) -I$(INCLUDE) $(TOGGLE_READLINE) -o test
+
 clean:
 	rm -rf test
 

@@ -3,6 +3,7 @@
 #include <string>
 #include <unistd.h>
 #include <stdio.h>
+#include <cctype>
 #include <readline/readline.h>
 #include "Contact.hpp"
 
@@ -11,7 +12,7 @@
 
 
 
-int main(int argc, char const *argv[])
+int main(int argc, char **argv)
 {
     std::string line;
     std::string word;
@@ -50,7 +51,8 @@ int main(int argc, char const *argv[])
             j++;
             if (j == NUM_ATTRIBUTES)
             {
-                Contact(attributes).show_contact(); // const_cast<Contact&>(contact) -> T(ype) 'reference'
+                // const_cast<Contact&>(contact) -> T(ype) 'reference'
+                Contact(attributes).show_contact();
                 break;
             }
         }
@@ -59,3 +61,6 @@ int main(int argc, char const *argv[])
     }
     return 0;
 }
+
+
+
