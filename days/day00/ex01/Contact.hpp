@@ -27,7 +27,7 @@ class Contact
             nickname = "",
             phone_number = "",
             darkest_secret = "";};
-        Contact(string attrs[5]);
+        Contact(string attrs[5]); // good for testing
         ~Contact();
 
         bool    is_empty();

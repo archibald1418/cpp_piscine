@@ -45,13 +45,12 @@ int main(int argc, char const *argv[])
             word = line.substr(i, end - i);
 
             
-
             i += word.length();
             attributes[j] = word;
             j++;
             if (j == NUM_ATTRIBUTES)
             {
-                Contact(attributes).show_contact(); // T 'reference'
+                Contact(attributes).show_contact(); // const_cast<Contact&>(contact) -> T(ype) 'reference'
                 break;
             }
         }

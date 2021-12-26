@@ -59,11 +59,11 @@ void    Contact::update_contact(Contact &contact)
 
 void    Contact::show_contact()
 {
-    std::cout << "first name ->\t" << this->first_name + "\n";
-    std::cout << "last_name ->\t" << this->last_name + "\n";
-    std::cout << "phone number ->\t" << this->phone_number + "\n";
-    std::cout << "nickname ->\t" << this->nickname + "\n";
-    std::cout << "darkest secret ->\t" << this->darkest_secret + "\n";
+    std::cout << std::setw(20) <<  "first name ->" << std::setw(10) << this->first_name + "\n";
+    std::cout << std::setw(20) <<  "last_name ->"  << std::setw(10) << this->last_name + "\n";
+    std::cout << std::setw(20) <<  "phone number ->"  << std::setw(10) << this->phone_number + "\n";
+    std::cout << std::setw(20) <<  "nickname ->" << std::setw(10)  << this->nickname + "\n";
+    std::cout << std::setw(20) <<  "darkest secret ->" << std::setw(10) << this->darkest_secret + "\n";
 }
 
 string Contact::get_first_name()const
