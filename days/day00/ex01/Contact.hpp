@@ -1,5 +1,6 @@
 #ifndef CONTACT_H
 # define CONTACT_H
+#include <string>
 
 typedef std::string string;
 
@@ -26,11 +27,15 @@ class Contact
             nickname = "",
             phone_number = "",
             darkest_secret = "";};
+        Contact(string attrs[5]);
         ~Contact();
 
         bool    is_empty();
         bool    is_init();
         void    update_contact(Contact &contact);
+        void    show_contact();
+
+        // Getters
         string  get_first_name()const;
         string  get_last_name()const;
         string  get_nickname()const;
