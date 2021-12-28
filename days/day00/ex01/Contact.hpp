@@ -30,10 +30,11 @@ class Contact
         Contact(string attrs[5]); // good for testing
         ~Contact();
 
-        bool    is_empty();
-        bool    is_init();
+        bool    is_empty() const;
+        bool    is_init() const;
         void    update_contact(Contact &contact);
         void    show_contact();
+        int     index;
 
         // Getters
         string  get_first_name()const;
@@ -41,18 +42,6 @@ class Contact
         string  get_nickname()const;
         string  get_phone_number()const;
         string  get_darkest_secret()const;
-        
-        
-        
-        
-
-        /*
-        Each column must be 10 chars wide, right aligned and separated by a ’|’
-            character. 
-        Any output longer than the columns’ width is truncated and the
-            last displayable character is replaced by a dot (’.’)
-        */
-        
 
 };
 

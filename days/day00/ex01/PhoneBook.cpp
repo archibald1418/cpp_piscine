@@ -2,10 +2,12 @@
 #include <string>
 #include <iomanip>
 #include <iostream>
+#include <cstring>
 
 PhoneBook::PhoneBook()
 {
     this->contacts.top = 0;
+    this->contacts.last = 0;
 }
 
 PhoneBook::~PhoneBook()
@@ -18,38 +20,29 @@ void    PhoneBook::exit()
     std::exit(0);
 }
 
-void    PhoneBook::add(Contact contact)
+void    PhoneBook::add(Contact &contact)
 {
     t_contacts *contacts = &this->contacts;
     if (contact.is_empty() == false)
     {
-        contacts->list[contacts->top] = contact;
-        contacts->top++;
-        contacts->top %= BOOK_SIZE;
-    }
-}
-
-void    PhoneBook::search()
-{
-    int i = 0;
-    t_contacts *contacts = &this->contacts;
-    while (i < contacts->top)
-    {
-        show_contact(i);
-        i++;
+        contact.index = contacts->last; // change index before copying
+        contacts->list[contacts->last % BOOK_SIZE] = contact; // copies into array
+        if (contacts->top < BOOK_SIZE)
+            contacts->top++;
+        contacts->last++;
     }
 }
 
 void   PhoneBook::show_contact(int i)
 {
 
-    std::cout << '|';
+    const Contact &contact = this->contacts.list[i % BOOK_SIZE];
 
+    std::cout << '|';
     // Show index
     std::cout << std::right << std::setw(10);
-    std::cout << i << '|';
+    std::cout << contact.index << '|';
     
-    Contact contact = this->contacts.list[i];
     show_field(contact.get_first_name());
     show_field(contact.get_last_name());
     show_field(contact.get_nickname());
@@ -69,15 +62,16 @@ void    PhoneBook::show_last_contact()
 {
     if (this->contacts.top == 0)
         return ;
-    this->show_contact(this->contacts.top - 1);
+    this->show_contact(this->contacts.last - 1);
     std::cout << std::endl;
 }
 
 void    PhoneBook::show_contacts()
 {
+    int i;
     if (this->is_empty())
         return ;
-    int i = 0;
+    i = 0;
     while (i < this->contacts.top)
     {
         delineate();
@@ -98,4 +92,3 @@ bool    PhoneBook::is_empty()
 {
     return (this->contacts.top == 0);
 }
-

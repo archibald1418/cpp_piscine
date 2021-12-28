@@ -12,6 +12,7 @@ typedef struct  s_contacts
 {
     Contact list[BOOK_SIZE];
     int     top;
+    int     last;
 }               t_contacts;
 
 class PhoneBook
@@ -26,7 +27,7 @@ public:
     PhoneBook();
     ~PhoneBook();
     void    exit();
-    void    add(Contact contact);
+    void    add(Contact &contact);
     void    search();
     void    show_contact(int i);
     void    show_contacts();

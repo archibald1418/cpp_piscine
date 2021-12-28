@@ -30,7 +30,7 @@ Contact::Contact(string attrs[5])
     this->darkest_secret = attrs[4];
 }
 
-bool    Contact::is_empty()
+bool    Contact::is_empty() const
 {
     return (
         this->first_name.empty() && \
@@ -41,7 +41,7 @@ bool    Contact::is_empty()
     );
 }
 
-bool    Contact::is_init()
+bool    Contact::is_init() const
 {
     return (
         this->first_name != "" && \

@@ -15,12 +15,8 @@ void    get_user_input(string field_name, string &field)
     std::getline(std::cin, field);
 }
 
-void    fill_book()
-{
-    
-}
 
-int main(int argc, char **argv, char **env)
+void    loop()
 {
     int i = 0;
     string input;
@@ -61,5 +57,24 @@ int main(int argc, char **argv, char **env)
         if (input == "SEARCH" || input == "search")
             phonebook.show_contacts();
     }
+}
+
+void    objs()
+{
+    Contact lst[2];
+
+    lst[0] = Contact();
+    lst[1]= Contact();
+
+    Contact contact = Contact("aasdf", "a", "b", "d", "a");
+    lst[0] = contact;
+    
+    lst[0].show_contact();
+}
+
+int main(int argc, char **argv, char **env)
+{
+    // objs();
+    loop();
 }
 
