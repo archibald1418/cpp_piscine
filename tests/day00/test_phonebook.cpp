@@ -10,8 +10,14 @@
 
 void    get_user_input(string field_name, string &field)
 {
-    std::cout << std::setw(20) <<  "Give me your " << field_name << " -> ";
+    std::cout << std::setw(10) << "Give me your ";
+    std::cout << std::left << std::setw(15) << field_name << "  -> ";
     std::getline(std::cin, field);
+}
+
+void    fill_book()
+{
+    
 }
 
 int main(int argc, char **argv, char **env)
@@ -51,8 +57,9 @@ int main(int argc, char **argv, char **env)
                 phonebook.add(contact);
                 phonebook.show_last_contact();
             }
-            break;
         }
+        if (input == "SEARCH" || input == "search")
+            phonebook.show_contacts();
     }
 }
 

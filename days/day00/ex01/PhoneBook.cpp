@@ -46,7 +46,7 @@ void   PhoneBook::show_contact(int i)
     std::cout << '|';
 
     // Show index
-    std::cout << std::setw(10);
+    std::cout << std::right << std::setw(10);
     std::cout << i << '|';
     
     Contact contact = this->contacts.list[i];
@@ -57,34 +57,33 @@ void   PhoneBook::show_contact(int i)
 
 void    PhoneBook::show_field(string field)
 {
-    std::cout << std::setw(10);
-    int i = 0;
-    while ((i < field.length()) && i < (FIELD_WIDTH - 1))
-    {
-        std::cout << field[i];
-        
-        i++;
-    }
-    if (i == FIELD_WIDTH - 1)
-        std::cout << '.';
+    std::cout << std::right << std::setw(10);
+    if (field.length() > FIELD_WIDTH)
+        std::cout << field.substr(0, FIELD_WIDTH - 1) + ".";
+    else
+        std::cout << field;
     std::cout << '|';
 }
 
 void    PhoneBook::show_last_contact()
 {
-    this->show_contact(this->contacts.top);
+    if (this->contacts.top == 0)
+        return ;
+    this->show_contact(this->contacts.top - 1);
+    std::cout << std::endl;
 }
 
 void    PhoneBook::show_contacts()
 {
     if (this->is_empty())
         return ;
-    delineate();
     int i = 0;
     while (i < this->contacts.top)
     {
+        delineate();
         show_contact(i);
         std::cout << std::endl;
+        i++;
     }
     delineate();
     std::cout << std::endl;
@@ -92,7 +91,7 @@ void    PhoneBook::show_contacts()
 
 void    PhoneBook::delineate()
 {
-    std::cout << std::string(TABLE_WIDTH, '|');
+    std::cout << std::string(TABLE_WIDTH, '-') << std::endl;
 }
 
 bool    PhoneBook::is_empty()
