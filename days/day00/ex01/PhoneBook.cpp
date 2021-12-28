@@ -12,7 +12,7 @@ PhoneBook::PhoneBook()
 
 PhoneBook::~PhoneBook()
 {
-    // std::cout << "Phone Book is destroted" << std::endl;
+    ;
 }
 
 void    PhoneBook::exit()
