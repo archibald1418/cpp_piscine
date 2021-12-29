@@ -37,6 +37,12 @@ Account::~Account()
     std::cout << "index:" << this->_accountIndex << ";" <<\
         "amount:" << this->_amount << ";" <<\
         "closed"; // NB: careful with endl
+    if (_nbAccounts > 1)
+        std::cout << std::endl;
+    _nbAccounts--;
+    _totalAmount -= this->_amount;
+    _totalNbDeposits -= this->_nbDeposits;
+    _totalNbWithdrawals -= this->_nbWithdrawals;
 }
 
 void    Account::displayStatus(void)const
@@ -136,6 +142,16 @@ void    Account::_displayTimestamp()
     
     std::cout << "] ";
     
+}
+
+void    Account::displayAccountsInfos()
+{
+    _displayTimestamp();
+    std::cout << "accounts:" << _nbAccounts << ";" <<\
+        "total:" << _totalAmount << ";" <<\
+        "deposits:" << _totalNbDeposits << ";" <<\
+        "withdrawals:" << _totalNbWithdrawals;
+    std::cout << std::endl;    
 }
 
 // Public amount getter (for logs)

@@ -14,4 +14,8 @@ int main()
 
 	account.makeWithdrawal(877);
 	account.displayStatus();
+
+	std::cout << "ACCOUNT INFOS!\n";
+
+	account.displayAccountsInfos();
 }
