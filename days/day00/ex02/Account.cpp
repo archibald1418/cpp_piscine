@@ -28,9 +28,22 @@ Account::Account()
 
 Account::~Account()
 {
+    _displayTimestamp();
     std::cout << "index:" << this->_accountIndex << ";" <<\
         "amount:" << this->_amount << ";" <<\
         "closed"; // NB: careful with endl
+}
+
+void    Account::displayStatus(void)const
+{
+    _displayTimestamp();
+
+    std::cout << "index:" << _accountIndex << ";" <<\
+        "amount:" << this->_amount << ";" <<\
+        "deposits:" << this->_nbDeposits << ";"\
+        "withdrawals:" << this->_nbWithdrawals;
+    std::cout << std::endl;
+    
 }
 
 void    Account::makeDeposit(int deposit)
