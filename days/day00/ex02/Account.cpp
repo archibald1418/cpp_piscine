@@ -62,8 +62,9 @@ bool    Account::makeWithdrawal(int withdrawal)
         A method shouldn't do both logging and object modification.
             It would be better to leave the logging to a function
         which knows what operation was envoked.
-            Or TODO: write a logger-decorator for makeWithdrawal and makeDeposit
-        to save the state of Account before execution of the methods
+            Or TODO: write a logger decorator for makeWithdrawal and makeDeposit
+        to save before-state of Account before execution of the methods,
+        print it and print the after-state
     */ 
 
     // Check withdrawal status
