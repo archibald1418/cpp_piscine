@@ -109,6 +109,8 @@ void    Account::_displayTimestamp()
             std::setfill('0') << std::setw(2) <<\
         now->tm_sec;
     
+    std::cout << "] ";
+    
 }
 
 // Public amount getter (for logs)
