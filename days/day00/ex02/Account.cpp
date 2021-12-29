@@ -7,7 +7,7 @@
 Account::Account(int initial_deposit)
 {
     // To myself
-    _accountIndex = _nbAccounts;
+    _accountIndex = getNbAccounts();
     _amount = initial_deposit;
     _nbDeposits = 1;
     _nbWithdrawals = 0;
@@ -20,7 +20,10 @@ Account::Account(int initial_deposit)
 
 Account::Account()
 {
-    Account(0);
+    _accountIndex = 0;
+    _amount = 0;
+    _nbDeposits = 0;
+    _nbWithdrawals = 0;
 }
 
 Account::~Account()
@@ -122,23 +125,29 @@ int Account::checkAmount()const
 
 // Static getters
 // NOTE: could be modified in progress
-int Account::getNbAccounts()
+int Account::getNbAccounts(void)
 {
     return (_nbAccounts);
 }
 
-int Account::getTotalAmount()
+int Account::getTotalAmount(void)
 {
     return (_totalAmount);
 }
 
-int Account::getNbDeposits()
+int Account::getNbDeposits(void)
 {
     return (_totalNbDeposits);
 }
 
-int Account::getNbWithdrawals()
+int Account::getNbWithdrawals(void)
 {
     return (_totalNbWithdrawals);
 }
+
+// Defining static members
+int Account::_nbAccounts = 0;
+int Account::_totalAmount = 0;
+int Account::_totalNbDeposits = 0;
+int Account::_totalNbWithdrawals = 0;
 
