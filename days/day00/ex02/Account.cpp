@@ -7,15 +7,20 @@
 Account::Account(int initial_deposit)
 {
     // To myself
-    _accountIndex = getNbAccounts();
+    _accountIndex = _nbAccounts;
     _amount = initial_deposit;
-    _nbDeposits = 1;
+    _nbDeposits = 0;
     _nbWithdrawals = 0;
     
     // To all the others
     _totalAmount += initial_deposit;
     _nbAccounts++;
-    _totalNbDeposits++;
+
+    _displayTimestamp();
+    std::cout << "index:" << this->_accountIndex << ";" <<\
+        "amount:" << this->_amount << ";" <<\
+        "created"; // NB: careful with endl
+    std::cout << std::endl;
 }
 
 Account::Account()
@@ -51,8 +56,9 @@ void    Account::makeDeposit(int deposit)
     // To ours
 
     // show previous amount
+    _displayTimestamp();
     std::cout << "index:" << _accountIndex << ";" <<\
-        "p_amount:" << _amount << ";" << "deposit:" << deposit;
+        "p_amount:" << _amount << ";" << "deposit:" << deposit << ";";
 
     // Update account
     this->_amount += deposit;
@@ -61,7 +67,7 @@ void    Account::makeDeposit(int deposit)
     // show final amount
     std::cout << "amount:" << _amount << ";" <<\
         "nb_deposits:" << _nbDeposits;
-
+    std::cout << std::endl;
     // To theirs
     _totalNbDeposits++;
 }
@@ -69,6 +75,7 @@ void    Account::makeDeposit(int deposit)
 bool    Account::makeWithdrawal(int withdrawal)
 {
     // Show previous amount
+    _displayTimestamp();
     std::cout << "index:" << _accountIndex << ";" <<\
         "p_amount:" << _amount << ";" << "withdrawal:";
 
@@ -86,7 +93,7 @@ bool    Account::makeWithdrawal(int withdrawal)
     // Check withdrawal status
     if (withdrawal > _amount)
     {   
-        std::cout << "refused"; // or print it higher
+        std::cout << "refused" << std::endl; // or print it higher
         return (false);
     }
     
@@ -98,6 +105,7 @@ bool    Account::makeWithdrawal(int withdrawal)
     std::cout << withdrawal << ";" <<\
         "amount:" << _amount << ";" <<\
             "nb_withdrawals:" << _nbWithdrawals;
+    std::cout << std::endl;
 
     // To theirs
     _totalNbWithdrawals++;
