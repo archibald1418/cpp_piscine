@@ -4,7 +4,7 @@
 
 int main()
 {
-	Account account = Account(876);
+	Account account = Account(7);
 
 	account.displayStatus();
 
@@ -12,6 +12,6 @@ int main()
 
 	account.displayStatus();
 
-	account.makeWithdrawal(900);
+	account.makeWithdrawal(877);
 	account.displayStatus();
 }
