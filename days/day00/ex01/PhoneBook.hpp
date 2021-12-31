@@ -18,19 +18,19 @@ typedef struct  s_contacts
 class PhoneBook
 {
 private:
-    t_contacts  contacts;  
-    static void     delineate();
-    void    show_field(string field);
-    bool    is_empty();
+    t_contacts      contacts;
+    void            show_field(string field);
+    bool            is_empty();
     
 public:
     PhoneBook();
     ~PhoneBook();
+    static void     delineate();
     void    exit();
     void    add(Contact &contact);
-    void    search();
     void    show_contact(int i);
     void    show_contacts();
+    void    search(int i);
     void    show_last_contact();
     // search
 

@@ -57,7 +57,7 @@ void    Contact::update_contact(Contact &contact)
     this->darkest_secret = contact.darkest_secret;
 }
 
-void    Contact::show_contact()
+void    Contact::show_contact()const
 {
     std::cout << std::setw(20) <<  "first name ->" <<    std::setw(10) << this->first_name + "\n";
     std::cout << std::setw(20) <<  "last_name ->"  <<     std::setw(10) << this->last_name + "\n";

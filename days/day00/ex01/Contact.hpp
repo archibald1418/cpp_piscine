@@ -33,7 +33,7 @@ class Contact
         bool    is_empty() const;
         bool    is_init() const;
         void    update_contact(Contact &contact);
-        void    show_contact();
+        void    show_contact()const;
         int     index;
 
         // Getters

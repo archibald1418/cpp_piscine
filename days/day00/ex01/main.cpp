@@ -4,6 +4,7 @@
 #include <iostream>
 #include <assert.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 
 void    get_user_input(string field_name, string &field)
@@ -23,6 +24,7 @@ void    repl()
     string nickname;
     string phone_number;
     string darkest_secret;
+    string index;
 
     while (true)
     {
@@ -49,7 +51,11 @@ void    repl()
                 // phonebook.show_last_contact();
         }
         if (input == "SEARCH")
+        {
             phonebook.show_contacts();
+            get_user_input("contact index", index);
+            phonebook.search(atoi(index.c_str()));
+        }
     }
 }
 

@@ -83,6 +83,19 @@ void    PhoneBook::show_contacts()
     std::cout << std::endl;
 }
 
+void    PhoneBook::search(int i)
+{
+    if (!this->is_empty())
+    {
+        delineate();
+        show_contact(i);
+        std::cout << std::endl;
+        delineate();
+    }
+    else
+        std::cout << "Phonebook is empty" << std::endl;
+}
+
 void    PhoneBook::delineate()
 {
     std::cout << std::string(TABLE_WIDTH, '-') << std::endl;
