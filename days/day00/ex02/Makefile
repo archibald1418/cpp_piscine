@@ -7,4 +7,7 @@ clean:
 	rm -rf $(NAME)
 	rm -rf *.dSYM/
 
+fclean:
+	rm -rf *.o
+
 re: clean all
