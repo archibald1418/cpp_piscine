@@ -4,11 +4,15 @@
 
 void    randomChump(std::string name)
 {
-    Zombie *zombie;
+    // HEAD 
+    // Zombie *zombie;
 
-    zombie = newZombie(name);
-    if (!zombie)
-        return ;
-    zombie->announce();
-    delete zombie; // No leaks
+    // zombie = newZombie(name);
+    // if (!zombie)
+    //     return ;
+    // zombie->announce();
+    // delete zombie; // No leaks
+
+    Zombie zombie = Zombie(name);
+    // destroyer
 }

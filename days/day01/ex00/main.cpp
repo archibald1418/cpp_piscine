@@ -3,7 +3,7 @@
 int main()
 {
     Zombie stack = Zombie("stack");
-    Zombie *heap = newZombie("HEAP");
+    Zombie *heap = new Zombie("HEAP");
     randomChump("Chump");
     
     Zombie *zombieHoard = new Zombie[42]; // Default constructor Zombie() is required
