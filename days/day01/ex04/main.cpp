@@ -2,12 +2,11 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-
-
+#include "main.hpp"
 
 int    putstr_err(std::string msg)
 {
-    std::cout << msg << std::endl;
+    std::cout << RED << msg << RESET << std::endl;
     return (1);
 }
 
@@ -33,6 +32,7 @@ int replace_file(std::string &s1, std::string &s2, \
 
     std::string line;
     std::string replaced;
+    std::string delim = (s1 == "\n") ? s2 : "\n";
 
     int i = 0;
     while (std::getline(infile, line))
@@ -40,7 +40,7 @@ int replace_file(std::string &s1, std::string &s2, \
         replaced = replace_line(s1, s2, line, "");
         outfile << replaced;
         if (!infile.eof())
-            outfile << std::endl;
+            outfile << delim;
         i++;
         
     }
@@ -61,7 +61,7 @@ int run_replace(int argc, char **argv)
     std::ifstream ifs(filename);
     if (ifs.is_open() == false)
         return (putstr_err(std::string("Could not open file '") + filename + "'"));
-    if (ifs.eof())
+    if (ifs.peek() == EOF)
         return (putstr_err(filename + " is empty"));
 
     std::string outfile = filename + ".replace";
@@ -72,9 +72,11 @@ int run_replace(int argc, char **argv)
         return (putstr_err(std::string("Could not stream file '") + outfile + "'"));
     }
 
-    replace_file(s1, s2, ifs, ofs);
+    int out = replace_file(s1, s2, ifs, ofs);
     ifs.close();
     ofs.close();
+    if (out)
+        return (1);
     std::cout << "Look at '" + outfile + "'" << std::endl; 
     return (0);
 }
@@ -84,17 +86,18 @@ int main(int argc, char **argv)
     std::string filename;
     std::string s1;
     std::string s2;
+    std::string nl("\n");
     
     std::string line;
     std::string ofilename;
     
     std::cout << "Running with given args:" << std::endl << std::endl;
     run_replace(argc, argv);
-    std::cout << std::endl <<  "Running repl. You can input your args." << std::endl;
-    std::cout << std::endl <<  "Type anything to start: " << std::endl;
+    std::cout << std::endl <<  "Running repl. You can input your args." << std::endl << "*";
+    std::cout << std::endl <<  YELLOW << "\tType REPLACE to start:\n\tOPEN to show file\n\tEXIT to exit" << RESET << std::endl << "*" << std::endl;
     while (!std::cin.eof())
     {
-        std::cout << "replace >> ";
+        std::cout << BLUE << "replace >> " << RESET;
 
         std::getline(std::cin, line);
         if (line.empty() || std::cin.eof())
@@ -109,55 +112,36 @@ int main(int argc, char **argv)
             std::getline(std::cin, ofilename);
             std::ifstream ofile(ofilename);
             if (ofile.is_open())
-                std::cout << ofile.rdbuf() << " > EOF < " << std::endl; // read the whole file
+            {
+                if (ofile.peek() == EOF) // rets next char without extracting
+                    std::cout << "File is empty" << std::endl;
+                else
+                    std::cout << ofile.rdbuf() << "--EOF" << std::endl; // read the whole file
+            }
             continue;
         }
-        
-        // if (line == "CREATE" || line == "create")
-        // {
-        //     std::string srcfilename;
-
-        //     std::cout << "Create your own file" << std::endl;
-        //     std::cout << "Input filename?: ";
-        //     std::getline(std::cin, srcfilename);
-        //     std::cout << "Write something to " << srcfilename + " :" << std::endl << std::endl;
-            
-        //     std::ofstream ofs(srcfilename);
-        //     // Write from cin to file
-        //     std::string s;
-        //     while (true)
-        //     {
-        //         std::getline(std::cin, s);
-        //         if (s == "exit")
-        //         {
-        //          FIXME: waits output after exit 
-        //             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        //             break;
-        //         }
-        //         ofs << s << std::endl;
-        //     }
-        //     std::cout << "Text written to file" << std::endl;
-        //     ofs.close();
-        // }
 
         // Filename
-        std::cout << std::endl;
-        std::cout << "Filename?: ";
-        std::getline(std::cin, filename);
-        // S1
-        std::cout << "Src string?: ";
-        std::getline(std::cin, s1);
-        // S2
-        std::cout << "Dst string?: ";
-        std::getline(std::cin, s2);
+        if (line == "replace" || line == "REPLACE")
+            {
+                std::cout << std::endl;
+                std::cout << "Filename?: ";
+                std::getline(std::cin, filename);
+                // S1
+                std::cout << "Src string?: ";
+                std::getline(std::cin, s1);
+                // S2
+                std::cout << "Dst string?: ";
+                std::getline(std::cin, s2);
 
-        const char *args[] = {argv[0],
-            filename.c_str(), 
-            s1.c_str(), 
-            s2.c_str()
-        };
+                const char *args[] = {argv[0],
+                    filename.c_str(), 
+                    s1.c_str(), 
+                    s2.c_str()
+                };
 
-        // Run command
-        run_replace(4, (char **)args);
+                // Run command
+                run_replace(4, (char **)args);
+            }
     }
 }
