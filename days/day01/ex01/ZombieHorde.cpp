@@ -7,7 +7,7 @@ Zombie* zombieHorde(int N, std::string name)
     Zombie *zombie;
     int i;
 
-    zombie = new Zombie[N]();
+    zombie = new Zombie[N](); // In a single allocation
     if (!zombie)
         return (NULL);
 
@@ -18,5 +18,8 @@ Zombie* zombieHorde(int N, std::string name)
         i++;
     }
     return (zombie); 
-    
+
+    /*
+        They are zombies! That's why they die first - to be reborn!
+    */
 }

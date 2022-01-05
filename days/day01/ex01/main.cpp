@@ -7,7 +7,7 @@ int main()
     
     Zombie *zombies;
 
-    const int N = 10;
+    const int N = 7;
     const std::string name = "KEK";
 
     zombies = zombieHorde(N, name);
