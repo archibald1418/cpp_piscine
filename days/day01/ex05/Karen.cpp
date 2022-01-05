@@ -51,8 +51,10 @@ void    Karen::complain(std::string level)
 {
     int i = 0;
 
-    while (levels[i] != level)
+    while (levels[i] != level && i < Karen::N)
         i++;
+    if (i == Karen::N)
+        return ;
 
     (this->*complaints[i])(); // <- this was HARD to write
 }
