@@ -6,6 +6,7 @@
 
 Karen::Karen()
 {
+    // Didn't find a compiler-friendly way to init this as static or with init-list
     this->complaints[0] = &Karen::debug;
     this->complaints[1] = &Karen::warning;
     this->complaints[2] = &Karen::info;
@@ -53,7 +54,7 @@ void    Karen::complain(std::string level)
     while (levels[i] != level)
         i++;
 
-    (this->*complaints[i])();
+    (this->*complaints[i])(); // <- this was HARD to write
 }
 
-std::string Karen::levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+std::string Karen::levels[Karen::N] = {"DEBUG", "INFO", "WARNING", "ERROR"};
