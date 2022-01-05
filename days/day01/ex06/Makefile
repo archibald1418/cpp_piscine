@@ -1,5 +1,5 @@
 all:
-	c++ -g -Wall -Wextra -Werror Karen.cpp main.cpp -o karenFilter
+	c++ -std=c++98 -Wall -Wextra -Werror Karen.cpp main.cpp -o karenFilter
 clean:
 	rm -rf karenFilter
 	rm -rf test

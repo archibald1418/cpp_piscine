@@ -1,5 +1,5 @@
 all:
-	c++ -g -Wall -Wextra -Werror main.cpp -o replace
+	c++ -std=c++98 -g -Wall -Wextra -Werror main.cpp -o replace
 test: main.o  
 	c++ -g -Wall -Wextra -Werror main.cpp -o test
 
