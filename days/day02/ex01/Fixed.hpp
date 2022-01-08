@@ -23,8 +23,8 @@ public:
     std::string    toString()const; // repr
     
     // Fixed point representation
-    static std::string    convert(int val); // Print int value as fixed(8)
-    static std::string    convert(float val); // Print int value as fixed(8)
+    static int  convert(int val); // Print int value as fixed(8)
+    static int  convert(float val); // Print int value as fixed(8)
     
     
 

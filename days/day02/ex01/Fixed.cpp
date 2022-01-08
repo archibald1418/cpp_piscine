@@ -5,6 +5,13 @@
 
 // COPLIEN FORM
 // Default constructor
+
+// Bitmasks
+#define BYTEMASK_ONE            0xff000000
+#define BYTEMASK_TWO            0x00ff0000
+#define BYTEMASK_THREE          0x0000ff00
+#define BYTEMASK_FOUR           0x000000ff  
+
 Fixed::Fixed()
 {
     this->value = 0;
@@ -63,15 +70,13 @@ Fixed::Fixed(float f)
 
 Fixed::Fixed(int n)
 {
-    //TODO: init fp from int : "ctor(5) => 5.0000000, calc fp, set this->value to fp form"
-    this->value = 0;
-    (void)n;
+    this->value = (n << BITS);
 }
 
 
 std::string Fixed::toString(void)const
 {
-    return (convert(this->value));
+    return ("");
 }
 
 int Fixed::toInt(void)const
@@ -81,20 +86,25 @@ int Fixed::toInt(void)const
 
 float   Fixed::toFloat(void)const
 {
+    
     return (0.0);
 }
 
-std::string Fixed::convert(int val)
+
+int Fixed::convert(int val)
 {
-    (void)val;
-    std::string bits(BITS, '0');
-    return (bits);
+    return (static_cast<int>(roundf(val << BITS)));
 }
 
 int Fixed::getRawBits()const
 {
     std::cout << "getRawBits function called" << std::endl;
-    return (0);
+    std::cout << std::bitset<8>((BYTEMASK_ONE & this->value) >> 24) << ' ' <<\
+        std::bitset<8>((BYTEMASK_TWO & this->value) >> 16) << ' ' <<\
+            std::bitset<8>((BYTEMASK_THREE & this->value) >> 8) << ' ' <<\
+                std::bitset<8>((BYTEMASK_FOUR & this->value) >> 0) <<\
+                    << std::endl;
+    return (this->value);
 }
 
 void    Fixed::setRawBits(int const raw)const
