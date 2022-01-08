@@ -63,14 +63,12 @@ Fixed::~Fixed()
 
 Fixed::Fixed(float f)
 {
-    //TODO: init fp from float : "ctor(52.234) => 52.234, calc fp, set this->value to fp form"
-    this->value = 0;
-    (void)f;
+    this->value = convert(f);
 }
 
 Fixed::Fixed(int n)
 {
-    this->value = (n << BITS);
+    this->value = convert(n);
 }
 
 
@@ -93,17 +91,22 @@ float   Fixed::toFloat(void)const
 
 int Fixed::convert(int val)
 {
-    return (static_cast<int>(roundf(val << BITS)));
+    return (val << BITS);
+}
+
+int Fixed::convert(float val)
+{
+    return (static_cast<int>(roundf((1 << BITS) * val)));
 }
 
 int Fixed::getRawBits()const
 {
     std::cout << "getRawBits function called" << std::endl;
-    std::cout << std::bitset<8>((BYTEMASK_ONE & this->value) >> 24) << ' ' <<\
-        std::bitset<8>((BYTEMASK_TWO & this->value) >> 16) << ' ' <<\
-            std::bitset<8>((BYTEMASK_THREE & this->value) >> 8) << ' ' <<\
-                std::bitset<8>((BYTEMASK_FOUR & this->value) >> 0) <<\
-                    << std::endl;
+    std::cout <<\
+    std::bitset<8>((BYTEMASK_ONE & this->value) >> 24) << ' ' <<\
+    std::bitset<8>((BYTEMASK_TWO    & this->value) >> 16) << ' ' <<\
+    std::bitset<8>((BYTEMASK_THREE  & this->value) >> 8) << ' ' <<\
+    std::bitset<8>((BYTEMASK_FOUR   & this->value) >> 0) << " <- " << this->value << std::endl;
     return (this->value);
 }
 

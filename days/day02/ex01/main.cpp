@@ -1,10 +1,10 @@
 #include <iostream>
+#include <stdlib.h>
 #include "Fixed.hpp"
 
-int main( void ) 
+int main() 
 {
-
-	Fixed a;
+	Fixed a( 10.5f );
 	Fixed const b( 10 );
 	// Fixed const c( 42.42f );
 	// Fixed const d( b );
@@ -17,6 +17,7 @@ int main( void )
 	// std::cout << "b is " << b.toInt() << " as integer" << std::endl;
 	// std::cout << "c is " << c.toInt() << " as integer" << std::endl;
 	// std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+	a.getRawBits();
 	b.getRawBits();
 	return 0;
 }
