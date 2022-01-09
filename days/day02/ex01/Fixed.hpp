@@ -20,16 +20,17 @@ public:
     Fixed(float f); // Convert float to fixed(8)
     float toFloat(void) const; // 
     int toInt(void)const;
-    std::string    toString()const; // repr
+    // std::string    toString()const; // repr
     
     // Fixed point representation
     static int  convert(int val); // Print int value as fixed(8)
     static int  convert(float val); // Print int value as fixed(8)
-    
-    
 
+    bool has_fraction(void)const;
+    
     int getRawBits(void) const;
     void setRawBits(int const raw) const;
+    void show(std::ostream& os)const;
 };
 
 std::ostream& operator<<(std::ostream &os, const Fixed& fixed);

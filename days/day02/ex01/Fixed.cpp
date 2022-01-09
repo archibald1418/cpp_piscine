@@ -14,6 +14,8 @@
 #define BYTEMASK_THREE          0x0000ff00
 #define BYTEMASK_FOUR           0x000000ff  
 
+const int Fixed::BITS = 8;
+
 Fixed::Fixed()
 {
     this->value = 0;
@@ -76,22 +78,14 @@ Fixed::Fixed(int n)
     std::cout << ">>> " << n << std::endl;
 }
 
-
-std::string Fixed::toString(void)const
-{
-    return ("");
-}
-
 int Fixed::toInt(void)const
 {
-    
-    return (0);
+    return (static_cast<int>(roundf(this->toFloat())));
 }
 
 float   Fixed::toFloat(void)const
 {
-    
-    return (0.0);
+    return ((static_cast<float>(this->value)) / 256.0);
 }
 
 
@@ -124,11 +118,25 @@ void    Fixed::setRawBits(int const raw)const
     std::cout << "setRawBits function called" << std::endl;
 }
 
-std::ostream& operator<<(std::ostream &os, const Fixed& fixed)
+bool    Fixed::has_fraction(void)const
 {
-    std::cout << fixed.toString();
+    return (((BYTEMASK_FOUR & this->value) << 24) != 0);
+}
+
+void    Fixed::show(std::ostream& os)const
+{
+    os << std::setprecision(BITS);
+    if (has_fraction())
+        os << this->toFloat();
+    else
+        os << this->toInt();
+}
+
+
+std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
+{
+    fixed.show(os);
     return (os);
 }
 
-const int Fixed::BITS = 8;
 
