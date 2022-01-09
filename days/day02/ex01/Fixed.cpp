@@ -12,7 +12,8 @@
 #define BYTEMASK_ONE            0xff000000
 #define BYTEMASK_TWO            0x00ff0000
 #define BYTEMASK_THREE          0x0000ff00
-#define BYTEMASK_FOUR           0x000000ff  
+#define BYTEMASK_FOUR           0x000000ff
+#define EXPONENT                
 
 const int Fixed::BITS = 8;
 
@@ -69,7 +70,7 @@ Fixed::Fixed(float f)
 {
     this->value = convert(f);
     std::cout << ">>> " << std::setw(BITS + 1) <<\
-        std::scientific << f << std::endl;
+        std::fixed << f << std::endl;
 }
 
 Fixed::Fixed(int n)
@@ -127,7 +128,7 @@ void    Fixed::show(std::ostream& os)const
 {
     os << std::setprecision(BITS);
     if (has_fraction())
-        os << this->toFloat();
+        os << std::fixed << this->toFloat();
     else
         os << this->toInt();
 }
@@ -138,5 +139,6 @@ std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
     fixed.show(os);
     return (os);
 }
+
 
 
