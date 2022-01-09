@@ -4,7 +4,7 @@
 
 int main() 
 {
-	Fixed a( 10.5f );
+	Fixed a( 42.42f );
 	Fixed const b( 10 );
 	// Fixed const c( 42.42f );
 	// Fixed const d( b );

@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <iomanip>
+#include <ios>
 
 // COPLIEN FORM
 // Default constructor
@@ -51,7 +53,7 @@ Fixed& Fixed::operator=(const Fixed& other)
     */
 
     this->value = other.value; // Update fields
-    std::cout << "Assignation operator called" << std::endl;
+    std::cout << "Assignment operator called" << std::endl;
     return (*this);
 }
 
@@ -64,11 +66,14 @@ Fixed::~Fixed()
 Fixed::Fixed(float f)
 {
     this->value = convert(f);
+    std::cout << ">>> " << std::setw(BITS + 1) <<\
+        std::scientific << f << std::endl;
 }
 
 Fixed::Fixed(int n)
 {
     this->value = convert(n);
+    std::cout << ">>> " << n << std::endl;
 }
 
 
@@ -79,6 +84,7 @@ std::string Fixed::toString(void)const
 
 int Fixed::toInt(void)const
 {
+    
     return (0);
 }
 
@@ -102,6 +108,7 @@ int Fixed::convert(float val)
 int Fixed::getRawBits()const
 {
     std::cout << "getRawBits function called" << std::endl;
+    // std::cout << " >>> " << std::endl;
     std::cout <<\
     std::bitset<8>((BYTEMASK_ONE & this->value) >> 24) << ' ' <<\
     std::bitset<8>((BYTEMASK_TWO    & this->value) >> 16) << ' ' <<\
