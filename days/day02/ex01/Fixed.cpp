@@ -5,21 +5,21 @@
 #include <iomanip>
 #include <ios>
 
-// COPLIEN FORM
-// Default constructor
 
 // Bitmasks
 #define BYTEMASK_ONE            0xff000000
 #define BYTEMASK_TWO            0x00ff0000
 #define BYTEMASK_THREE          0x0000ff00
 #define BYTEMASK_FOUR           0x000000ff
-#define EXPONENT                
+
 
 const int Fixed::BITS = 8;
 
-Fixed::Fixed()
+// COPLIEN FORM
+// Default constructor
+
+Fixed::Fixed() : value(0)
 {
-    this->value = 0;
     std::cout << "Default constructor called" << std::endl;
 }
 
@@ -28,6 +28,7 @@ Fixed::Fixed(const Fixed& other) : value(other.value)
 {
 /* Initializing an object with another object */
     std::cout << "Copy constructor called" << std::endl;
+    *this = other;
 }
 
 // Assignment operator
@@ -69,14 +70,18 @@ Fixed::~Fixed()
 Fixed::Fixed(float f)
 {
     this->value = convert(f);
-    std::cout << ">>> " << std::setw(BITS + 1) <<\
-        std::fixed << f << std::endl;
 }
 
 Fixed::Fixed(int n)
 {
-    this->value = convert(n);
-    std::cout << ">>> " << n << std::endl;
+    long num = convert(n);
+    ssize_t ret = this->overflows(num);
+    if (ret == -1)
+        this->setRawBits(0);
+    else if (ret == 1)
+        this->setRawBits(std::numeric_limits<int>::max());
+    else
+        this->setRawBits(num);
 }
 
 int Fixed::toInt(void)const
@@ -86,36 +91,34 @@ int Fixed::toInt(void)const
 
 float   Fixed::toFloat(void)const
 {
-    return ((static_cast<float>(this->value)) / 256.0);
+    return ((static_cast<float>(this->value)) / static_cast<float>(1 << BITS));
 }
 
-
-int Fixed::convert(int val)
+long Fixed::convert(int val)
 {
-    return (val << BITS);
+    return (static_cast<long>(val) << BITS);
 }
 
-int Fixed::convert(float val)
+long Fixed::convert(float val)
 {
-    return (static_cast<int>(roundf((1 << BITS) * val)));
+    return (static_cast<long>(roundf((1 << BITS) * val)));
 }
 
 int Fixed::getRawBits()const
 {
-    std::cout << "getRawBits function called" << std::endl;
-    // std::cout << " >>> " << std::endl;
-    std::cout <<\
-    std::bitset<8>((BYTEMASK_ONE & this->value) >> 24) << ' ' <<\
+    std::cout << "\ngetRawBits function called:" << std::endl;
+    std::cout << ">>> " << this->toFloat() << std::endl;
+    std::cout << ">>> " <<\
+    std::bitset<8>((BYTEMASK_ONE    & this->value) >> 24) << ' ' <<\
     std::bitset<8>((BYTEMASK_TWO    & this->value) >> 16) << ' ' <<\
     std::bitset<8>((BYTEMASK_THREE  & this->value) >> 8) << ' ' <<\
     std::bitset<8>((BYTEMASK_FOUR   & this->value) >> 0) << " <- " << this->value << std::endl;
     return (this->value);
 }
 
-void    Fixed::setRawBits(int const raw)const
+void    Fixed::setRawBits(int const raw)
 {
-    (void)raw;
-    
+    this->value = raw;   
     std::cout << "setRawBits function called" << std::endl;
 }
 
@@ -124,11 +127,25 @@ bool    Fixed::has_fraction(void)const
     return (((BYTEMASK_FOUR & this->value) << 24) != 0);
 }
 
+ssize_t Fixed::overflows(const long l)const
+{
+    if (l > std::numeric_limits<int>::max())
+    {
+        std::cout << l << " overflows int max" << std::endl;
+        return (1);
+    }
+    if (l < std::numeric_limits<int>::min())
+    {
+        std::cout << l << " underflows int min" << l << std::endl;
+        return (-1);
+    }
+    return (0);
+}
+
 void    Fixed::show(std::ostream& os)const
 {
-    os << std::setprecision(BITS);
     if (has_fraction())
-        os << std::fixed << this->toFloat();
+        os << this->toFloat();
     else
         os << this->toInt();
 }

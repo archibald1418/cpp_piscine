@@ -8,28 +8,30 @@
 class Fixed
 {
 private:
-    int value; // FP Bits; TODO: check 8bit overflow
+    int value; 
     static const int BITS;
 public:
+    // Coplien
     Fixed(const Fixed& other);
     Fixed& operator=(const Fixed& other); // returns *this
     Fixed();
     ~Fixed();
 
-    Fixed(int n); // Convert int to fixed(8)
-    Fixed(float f); // Convert float to fixed(8)
+    Fixed(int n); // Convert int to fixed(BITS)
+    Fixed(float f); // Convert float to fixed(BITS)
+    
     float toFloat(void) const; // 
     int toInt(void)const;
-    // std::string    toString()const; // repr
     
     // Fixed point representation
-    static int  convert(int val); // Print int value as fixed(8)
-    static int  convert(float val); // Print int value as fixed(8)
+    static long  convert(int val); // Print int value as fixed(8)
+    static long  convert(float val); // Print int value as fixed(8)
 
     bool has_fraction(void)const;
+    ssize_t overflows(long const l)const;
     
     int getRawBits(void) const;
-    void setRawBits(int const raw) const;
+    void setRawBits(int const raw);
     void show(std::ostream& os)const;
 };
 
