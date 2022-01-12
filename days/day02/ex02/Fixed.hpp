@@ -3,59 +3,64 @@
 
 #include <iostream>
 #include <string>
-
+#ifndef EPSILON
+# define EPSILON 0.00390625f
+#endif
 
 class Fixed
 {
-private:
-    int value; 
-    static const int BITS;
-public:
-    // Coplien 
-    Fixed(const Fixed& other);
-    Fixed();
-    ~Fixed();
-    Fixed& operator=(const Fixed& other); // returns *this
+    private:
+        int value; 
+        static const int BITS;
+    public:
+        // Coplien 
+        Fixed(const Fixed& other);
+        Fixed();
+        ~Fixed();
+        Fixed& operator=(const Fixed& other); // returns *this
 
-    // Arithmetic
-    bool operator>(const Fixed& other);
-    bool operator<(const Fixed& other);
-    bool operator>=(const Fixed& other);
-    bool operator<=(const Fixed& other);
-    bool operator==(const Fixed& other);
-    bool operator!=(const Fixed& other);
+        // Constructors
+        Fixed(int n); // Convert int to fixed(BITS)
+        Fixed(float f); // Convert float to fixed(BITS)
 
-    Fixed& operator+(const Fixed& other);
-    Fixed& operator-(const Fixed& other);
-    Fixed& operator*(const Fixed& other);
-    Fixed& operator/(const Fixed& other);
+        // Comparisons
+        bool operator>(const Fixed& other)const;
+        bool operator<(const Fixed& other)const;
+        bool operator>=(const Fixed& other)const;
+        bool operator<=(const Fixed& other)const;
+        bool operator==(const Fixed& other)const;
+        bool operator!=(const Fixed& other)const;
 
-    static Fixed& min(const Fixed& self, const Fixed& other);
-    static Fixed& max(const Fixed& self, const Fixed& other);
+        
+        // Modifying operations
+        Fixed& operator+(const Fixed& other);
+        Fixed& operator-(const Fixed& other);
+        Fixed& operator*(const Fixed& other);
+        Fixed& operator/(const Fixed& other);
+        Fixed& operator-(int); // Unary minus
+        Fixed& operator++(); // ++pre
+        Fixed& operator++(int); // post++
+        Fixed& operator--();
+        Fixed& operator--(int);
+        Fixed& operator-=(const Fixed& other);
+        Fixed& operator+=(const Fixed& other);
 
-    Fixed& operator++();
-    Fixed operator++(int n);
-    Fixed& operator--();
-    Fixed operator--(int n); // Just an int increments only by 1
+        static const Fixed& min(const Fixed& fixedA, const Fixed& fixedB);
+        static const Fixed& max(const Fixed& fixedA, const Fixed& fixedB);
 
-    static int get_exponent(const Fixed& fixed);
+        float toFloat(void) const; // 
+        int toInt(void)const;
+        
+        // Fixed point representation
+        static long  convert(int val); // Print int value as fixed(8)
+        static float  convert(float val); // Print int value as fixed(8)
 
-    Fixed(int n); // Convert int to fixed(BITS)
-    Fixed(float f); // Convert float to fixed(BITS)
-    
-    float toFloat(void) const; // 
-    int toInt(void)const;
-    
-    // Fixed point representation
-    static long  convert(int val); // Print int value as fixed(8)
-    static long  convert(float val); // Print int value as fixed(8)
-
-    bool has_fraction(void)const;
-    ssize_t overflows(long const l)const;
-    
-    int getRawBits(void) const;
-    void setRawBits(int const raw);
-    void show(std::ostream& os)const;
+        bool has_fraction(void)const;
+        ssize_t overflows(long const l)const;
+        
+        int getRawBits(void) const;
+        void setRawBits(int const raw);
+        void show(std::ostream& os)const;
 };
 
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed);

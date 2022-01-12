@@ -11,8 +11,8 @@
 #define BYTEMASK_TWO            0x00ff0000
 #define BYTEMASK_THREE          0x0000ff00
 #define BYTEMASK_FOUR           0x000000ff
+#define BYTEMASK_PREFIX         0xffffff00
 
-#define EPSILON                 0.0001
 #define abs(X) X ? X > 0 : -X
 
 const int Fixed::BITS = 8;
@@ -67,96 +67,120 @@ Fixed& Fixed::operator=(const Fixed& other)
 // Destructor (Dtor)
 Fixed::~Fixed()
 {
-    std::cout << "Destructor called" << std::endl;
+    // std::cout << "Destructor called" << std::endl;
 }
 
 // Comparisons
-bool    Fixed::operator==(const Fixed& other)
+bool    Fixed::operator==(const Fixed& other)const
 {
     return (abs(this->toFloat() - other.toFloat()) <= EPSILON);
 }
 
-bool Fixed::operator!=(const Fixed& other)
+bool Fixed::operator!=(const Fixed& other)const
 {
-    return (~(*this == other));
+    return (not (*this == other));
 }
 
-bool Fixed::operator>(const Fixed& other)
+bool Fixed::operator>(const Fixed& other)const
 {
     return (this->toFloat() - other.toFloat() > EPSILON);
 }
 
-bool Fixed::operator<(const Fixed& other)
+bool Fixed::operator<(const Fixed& other)const
 {
     return (this->toFloat() - other.toFloat() < -EPSILON);
 }
 
-bool Fixed::operator<=(const Fixed& other)
+bool Fixed::operator<=(const Fixed& other)const
 {
     return ((*this == other) || (*this < other));
 }
 
-bool Fixed::operator>=(const Fixed& other)
+bool Fixed::operator>=(const Fixed& other)const
 {
     return ((*this == other) || (*this > other));
 }
 
-int Fixed::get_exponent(const Fixed& fixed)
-{
-    return (fixed.toInt()) >> (fixed.value < 0);
-    // -0.0 case not accounted for
-}
-
 Fixed& Fixed::operator+(const Fixed& other)
 {
-    int e1;
-    int e2;
-    int enorm;
-    int val;
-
-    // Get exponents
-    e1 = get_exponent(*this);
-    e2 = get_exponent(other);
-
-    enorm = (e1 - e1) ? (e1 >= e2) : (e2 - e1);
-    // Normalize to one exponent
-    if (-enorm > 0)
-        val = (this->value + other.value) << enorm;
-    else
-        val = (this->value + other.value) >> enorm;
-    if (this->overflows(val) == 1)
-        this->setRawBits(std::numeric_limits<int>::max()); 
+    float val = (this->toFloat() + other.toFloat()) * (1UL << BITS);
+    this->setRawBits(val);
     return (*this);
 
 }
 
 Fixed& Fixed::operator-(const Fixed& other)
 {
-    int e1;
-    int e2;
-    int enorm;
-    int val;
-
-    // Get exponents
-    e1 = get_exponent(*this);
-    e2 = get_exponent(other);
-
-    enorm = (e1 - e1) ? (e1 >= e2) : (e2 - e1);
-    // Normalize to one exponent
-    if (-enorm > 0)
-        val = (this->value - other.value) << enorm;
-    else
-        val = (this->value - other.value) >> enorm;
-    if (this->overflows(val) == -1)
-        this->setRawBits(0);
+    float val = (this->toFloat() - other.toFloat()) * (1UL << BITS);
+    this->setRawBits(val);
     return (*this);
 }
 
-// Fixed& Fixed::operator*(const Fixed& other)
-// {
-    
-// }
+Fixed& Fixed::operator-=(const Fixed& other)
+{
+    *this = *this - other;
+    return (*this);
+}
 
+Fixed& Fixed::operator+=(const Fixed& other)
+{
+    *this = *this + other;
+    return (*this);
+}
+
+Fixed& Fixed::operator++()
+{
+    *this += Fixed(EPSILON);
+    return (*this);
+}
+
+
+Fixed& Fixed::operator++(int)
+{
+    // *this = Fixed(EPSILON);
+    *this += Fixed(EPSILON);
+    return (*this);
+}
+
+Fixed& Fixed::operator--()
+{
+    *this -= Fixed(EPSILON);
+    return (*this);
+}
+
+Fixed& Fixed::operator--(int)
+{
+    *this -= Fixed(EPSILON);
+    return (*this);
+}
+
+Fixed& Fixed::operator*(const Fixed& other)
+{
+    float val = (this->toFloat() * other.toFloat());
+    this->setRawBits(this->convert(val));
+    return (*this);
+}
+
+Fixed& Fixed::operator/(const Fixed& other)
+{
+    float val = this->toFloat() * (1.0f / other.toFloat());
+    this->setRawBits(this->convert(val));
+    return (*this);
+}
+
+
+const Fixed& Fixed::max(const Fixed& fixedA, const Fixed& fixedB)
+{
+    if (fixedA >= fixedB)
+        return (fixedA);
+    return (fixedB);
+}
+const Fixed& Fixed::min(const Fixed& fixedA, const Fixed& fixedB)
+{
+    if (fixedA <= fixedB)
+        return (fixedA);
+    return (fixedB);
+}
 
 Fixed::Fixed(float f)
 {
@@ -176,7 +200,7 @@ int Fixed::toInt(void)const
 
 float   Fixed::toFloat(void)const
 {
-    return ((static_cast<float>(this->value)) / static_cast<float>(1 << BITS));
+    return ((static_cast<float>(this->value)) / static_cast<float>(1UL << BITS));
 }
 
 long Fixed::convert(int val)
@@ -184,14 +208,14 @@ long Fixed::convert(int val)
     return (static_cast<long>(val) << BITS);
 }
 
-long Fixed::convert(float val)
+float Fixed::convert(float val)
 {
-    return (static_cast<long>(roundf((1 << BITS) * val)));
+    return ((roundf((1UL << BITS) * val)));
 }
 
 int Fixed::getRawBits()const
 {
-    std::cout << "\ngetRawBits function called:" << std::endl;
+    // std::cout << "\ngetRawBits function called:" << std::endl;
     std::cout << ">>> " << this->toFloat() << std::endl;
     std::cout << ">>> " <<\
     std::bitset<8>((BYTEMASK_ONE    & this->value) >> 24) << ' ' <<\
@@ -204,13 +228,14 @@ int Fixed::getRawBits()const
 void    Fixed::setRawBits(int const raw)
 {
     ssize_t ret = this->overflows(raw);
+
     if (ret == -1)
         this->value = 0;
     else if (ret == 1)
         this->value = std::numeric_limits<int>::max();
     else
         this->value = raw;
-    std::cout << "setRawBits function called" << std::endl;
+    // std::cout << "setRawBits function called" << std::endl;
 }
 
 bool    Fixed::has_fraction(void)const
