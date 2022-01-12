@@ -32,9 +32,9 @@ int main( void )
 	std::cout << a << std::endl;
 	std::cout << a++ << std::endl;
 	std::cout << ++a << std::endl;
-	std::cout << b / two + Fixed(4) + Fixed(7.45f) << std::endl;
+	std::cout << b / two + Fixed(4) + Fixed(7.45f) - Fixed(0.3f) << std::endl;
 	std::cout << Fixed::max( a, b ) << std::endl;
-	std::cout << Fixed::min( a, b ) << std::endl;
+	std::cout << Fixed::min( a, b ) << std::endl << std::endl;
 
 	const Fixed& eps = Fixed(EPSILON);
 	const Fixed& epsm1  = Fixed(EPSILON - 0.00000000001f);

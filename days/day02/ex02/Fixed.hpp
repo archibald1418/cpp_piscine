@@ -20,8 +20,8 @@ class Fixed
         Fixed& operator=(const Fixed& other); // returns *this
 
         // Constructors
-        Fixed(int n); // Convert int to fixed(BITS)
-        Fixed(float f); // Convert float to fixed(BITS)
+        Fixed(const int n); // Convert int to fixed(BITS)
+        Fixed(const float f); // Convert float to fixed(BITS)
 
         // Comparisons
         bool operator>(const Fixed& other)const;
@@ -47,16 +47,17 @@ class Fixed
 
         static const Fixed& min(const Fixed& fixedA, const Fixed& fixedB);
         static const Fixed& max(const Fixed& fixedA, const Fixed& fixedB);
+        static float  abs(float x);
 
         float toFloat(void) const; // 
         int toInt(void)const;
         
         // Fixed point representation
-        static long  convert(int val); // Print int value as fixed(8)
-        static float  convert(float val); // Print int value as fixed(8)
+        static int  convert(int val); // Print int value as fixed(8)
+        static int  convert(float val); // Print int value as fixed(8)
 
         bool has_fraction(void)const;
-        ssize_t overflows(long const l)const;
+        ssize_t overflows(int const l)const;
         
         int getRawBits(void) const;
         void setRawBits(int const raw);

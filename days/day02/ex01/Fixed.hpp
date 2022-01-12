@@ -24,11 +24,11 @@ public:
     int toInt(void)const;
     
     // Fixed point representation
-    static long  convert(int val); // Print int value as fixed(8)
-    static float  convert(float val); // Print int value as fixed(8)
+    static int  convert(int val); // Print int value as fixed(8)
+    static int  convert(float val); // Print int value as fixed(8)
 
     bool has_fraction(void)const;
-    ssize_t overflows(long const l)const;
+    static ssize_t overflows(long l);
     
     int getRawBits(void) const;
     void setRawBits(int const raw);

@@ -67,12 +67,12 @@ Fixed::~Fixed()
     std::cout << "Destructor called" << std::endl;
 }
 
-Fixed::Fixed(float f)
+Fixed::Fixed(const float f)
 {
     this->value = convert(f);
 }
 
-Fixed::Fixed(int n)
+Fixed::Fixed(const int n)
 {
     long num = convert(n);
     ssize_t ret = this->overflows(num);
@@ -94,14 +94,14 @@ float   Fixed::toFloat(void)const
     return ((static_cast<float>(this->value)) / static_cast<float>(1 << BITS));
 }
 
-long Fixed::convert(int val)
+int Fixed::convert(int val)
 {
-    return (static_cast<long>(val) << BITS);
+    return (static_cast<int>(val) << BITS);
 }
 
-float Fixed::convert(float val)
+int Fixed::convert(float val)
 {
-    return ((roundf(static_cast<float>(1 << BITS) * val)));
+    return (static_cast<int>(roundf(static_cast<float>(1 << BITS) * val)));
 }
 
 int Fixed::getRawBits()const
@@ -118,7 +118,7 @@ int Fixed::getRawBits()const
 
 void    Fixed::setRawBits(int const raw)
 {
-    this->value = raw;   
+    this->value = raw;
     std::cout << "setRawBits function called" << std::endl;
 }
 
@@ -127,7 +127,7 @@ bool    Fixed::has_fraction(void)const
     return (((BYTEMASK_FOUR & this->value) << 24) != 0);
 }
 
-ssize_t Fixed::overflows(const long l)const
+ssize_t Fixed::overflows(long l)
 {
     if (l > std::numeric_limits<int>::max())
     {

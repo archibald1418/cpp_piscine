@@ -13,7 +13,12 @@
 #define BYTEMASK_FOUR           0x000000ff
 #define BYTEMASK_PREFIX         0xffffff00
 
-#define abs(X) X ? X > 0 : -X
+float   Fixed::abs(float x)
+{
+    if (x >= EPSILON)
+        return (x);
+    return (-x);
+}
 
 const int Fixed::BITS = 8;
 
@@ -22,52 +27,40 @@ const int Fixed::BITS = 8;
 
 Fixed::Fixed() : value(0)
 {
-    std::cout << "Default constructor called" << std::endl;
+    // std::cout << "Default constructor called" << std::endl;
 }
 
 // Copy constructor (Ctor)
 Fixed::Fixed(const Fixed& other) : value(other.value)
 {
-/* Initializing an object with another object */
-    std::cout << "Copy constructor called" << std::endl;
+    // std::cout << "Copy constructor called" << std::endl;
     *this = other;
 }
 
 // Assignment operator
 Fixed& Fixed::operator=(const Fixed& other)
 {
-/* Updating object's members with another object's */
-
-    // Self assignemnt should do nothing
     if (this == &other)
         return (*this);
-
-    /* 
-    NOTE:
-        Assignment by its nature destroys previous state 
-    of the object. But member attributes and their states
-    should be still copied into the new object.
-        (std::copy helps with that)
-        This is vital for dynamically allocated types, 
-    since their memory usage patterns might differ drastically.
-    Moreover, leaks will occur if an operator= overload is not
-    done right. A copy-swap idiom helps to do that cleanly:
-    https://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom
-        However, in this case we are merely using built-in types 
-    on stack for our class so a regular assignment
-    done on fields is enough.
-    */
-
-    this->value = other.value; // Update fields
+    this->setRawBits(other.value);
     std::cout << "Assignment operator called" << std::endl;
     return (*this);
 }
-
 
 // Destructor (Dtor)
 Fixed::~Fixed()
 {
     // std::cout << "Destructor called" << std::endl;
+}
+
+Fixed::Fixed(const float f)
+{
+    this->setRawBits(this->convert(f));
+}
+
+Fixed::Fixed(const int n)
+{
+    this->setRawBits(this->convert(n));
 }
 
 // Comparisons
@@ -103,16 +96,22 @@ bool Fixed::operator>=(const Fixed& other)const
 
 Fixed& Fixed::operator+(const Fixed& other)
 {
-    float val = (this->toFloat() + other.toFloat()) * (1UL << BITS);
-    this->setRawBits(val);
+    float val = (this->toFloat() + other.toFloat());
+    this->setRawBits(this->convert(static_cast<float>(val)));
     return (*this);
 
 }
 
+Fixed&  Fixed::operator-(int) // Unary minus
+{
+    this->setRawBits(-this->value);
+    return (*this);
+}
+
 Fixed& Fixed::operator-(const Fixed& other)
 {
-    float val = (this->toFloat() - other.toFloat()) * (1UL << BITS);
-    this->setRawBits(val);
+    float val = (this->toFloat() - other.toFloat());
+    this->setRawBits(this->convert(static_cast<float>(val)));
     return (*this);
 }
 
@@ -137,7 +136,6 @@ Fixed& Fixed::operator++()
 
 Fixed& Fixed::operator++(int)
 {
-    // *this = Fixed(EPSILON);
     *this += Fixed(EPSILON);
     return (*this);
 }
@@ -156,18 +154,23 @@ Fixed& Fixed::operator--(int)
 
 Fixed& Fixed::operator*(const Fixed& other)
 {
-    float val = (this->toFloat() * other.toFloat());
-    this->setRawBits(this->convert(val));
+    float num = (this->toFloat() * other.toFloat()); 
+    this->setRawBits(this->convert(static_cast<float>(num)));
     return (*this);
 }
 
 Fixed& Fixed::operator/(const Fixed& other)
 {
+    if (other == Fixed(0))
+    {
+        std::cout << "Division by zero" << std::endl;
+        return (*this);
+    }
+            
     float val = this->toFloat() * (1.0f / other.toFloat());
     this->setRawBits(this->convert(val));
     return (*this);
 }
-
 
 const Fixed& Fixed::max(const Fixed& fixedA, const Fixed& fixedB)
 {
@@ -175,6 +178,7 @@ const Fixed& Fixed::max(const Fixed& fixedA, const Fixed& fixedB)
         return (fixedA);
     return (fixedB);
 }
+
 const Fixed& Fixed::min(const Fixed& fixedA, const Fixed& fixedB)
 {
     if (fixedA <= fixedB)
@@ -182,16 +186,6 @@ const Fixed& Fixed::min(const Fixed& fixedA, const Fixed& fixedB)
     return (fixedB);
 }
 
-Fixed::Fixed(float f)
-{
-    this->value = convert(f);
-}
-
-Fixed::Fixed(int n)
-{
-    long num = convert(n);
-    this->setRawBits(num);
-}
 
 int Fixed::toInt(void)const
 {
@@ -203,14 +197,14 @@ float   Fixed::toFloat(void)const
     return ((static_cast<float>(this->value)) / static_cast<float>(1UL << BITS));
 }
 
-long Fixed::convert(int val)
+int Fixed::convert(int val)
 {
-    return (static_cast<long>(val) << BITS);
+    return (val << BITS);
 }
 
-float Fixed::convert(float val)
+int Fixed::convert(float val)
 {
-    return ((roundf((1UL << BITS) * val)));
+    return (static_cast<int>(roundf(static_cast<float>(1UL << BITS) * val)));
 }
 
 int Fixed::getRawBits()const
@@ -227,14 +221,7 @@ int Fixed::getRawBits()const
 
 void    Fixed::setRawBits(int const raw)
 {
-    ssize_t ret = this->overflows(raw);
-
-    if (ret == -1)
-        this->value = 0;
-    else if (ret == 1)
-        this->value = std::numeric_limits<int>::max();
-    else
-        this->value = raw;
+    this->value = raw;
     // std::cout << "setRawBits function called" << std::endl;
 }
 
@@ -243,7 +230,7 @@ bool    Fixed::has_fraction(void)const
     return (((BYTEMASK_FOUR & this->value) << 24) != 0);
 }
 
-ssize_t Fixed::overflows(const long l)const
+ssize_t Fixed::overflows(const int l)const
 {
     if (l > std::numeric_limits<int>::max())
     {
