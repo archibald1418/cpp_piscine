@@ -34,7 +34,7 @@ Fixed::~Fixed()
 int Fixed::getRawBits()const
 {
     std::cout << "getRawBits function called" << std::endl;
-    return (0);
+    return (this->value);
 }
 
 void    Fixed::setRawBits(int const raw)
@@ -42,6 +42,7 @@ void    Fixed::setRawBits(int const raw)
     (void)raw;
     
     std::cout << "setRawBits function called" << std::endl;
+    this->value = raw;
 }
 
 const int Fixed::BITS = 8;
