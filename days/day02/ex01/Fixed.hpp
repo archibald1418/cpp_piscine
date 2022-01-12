@@ -17,8 +17,8 @@ public:
     Fixed();
     ~Fixed();
 
-    Fixed(int n); // Convert int to fixed(BITS)
-    Fixed(float f); // Convert float to fixed(BITS)
+    Fixed(const int n); // Convert int to fixed(BITS)
+    Fixed(const float f); // Convert float to fixed(BITS)
     
     float toFloat(void) const; // 
     int toInt(void)const;
