@@ -25,7 +25,7 @@ public:
     
     // Fixed point representation
     static long  convert(int val); // Print int value as fixed(8)
-    static long  convert(float val); // Print int value as fixed(8)
+    static float  convert(float val); // Print int value as fixed(8)
 
     bool has_fraction(void)const;
     ssize_t overflows(long const l)const;

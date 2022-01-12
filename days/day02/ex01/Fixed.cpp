@@ -99,9 +99,9 @@ long Fixed::convert(int val)
     return (static_cast<long>(val) << BITS);
 }
 
-long Fixed::convert(float val)
+float Fixed::convert(float val)
 {
-    return (static_cast<long>(roundf((1 << BITS) * val)));
+    return ((roundf(static_cast<float>(1 << BITS) * val)));
 }
 
 int Fixed::getRawBits()const
