@@ -10,14 +10,14 @@ ScavTrap::ScavTrap(std::string name) :
     std::cout << "ScavTrap built ok" << std::endl;
 }
 
-ScavTrap::ScavTrap()
+ScavTrap::ScavTrap() : ClapTrap()
 {
-    std::cout << "ScavTrap Destroyed" << std::endl;
+    std::cout << "ScavTrap nameless" << std::endl;
 }
 
 ScavTrap::~ScavTrap()
 {
-    std::cout << "ScavTrap destroyed" << std::endl;
+    std::cout << "ScavTrap default" << std::endl;
 }
 ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other) //ClapTrap(other._name, other._hitPoints, other._energyPoints, other._attackDamage)
 {

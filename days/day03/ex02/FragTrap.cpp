@@ -32,3 +32,8 @@ void FragTrap::highFivesGuys(void)
     std::cout << "FragTrap " << _name << " high fives you ";
     std::cout << " ^_^/ \\^_^ " << std::endl;
 }
+
+FragTrap::FragTrap() : ClapTrap()
+{
+    std::cout << "FragTrap default" << std::endl;
+}
