@@ -1,7 +1,7 @@
 NAME = claptrap
 
 all:
-	clang++ -Wc++98-compat-pedantic -std=c++98 -Wall -Wextra -Werror *.cpp -o $(NAME)
+	clang++ -g -std=c++98 -Wshadow -Wall -Wextra -Werror *.cpp -o test
 
 clean:
 	rm -rf $(NAME)

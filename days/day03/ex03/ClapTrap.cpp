@@ -64,4 +64,12 @@ void ClapTrap::beRepaired(unsigned int amount)
 {
     std::cout << "ClapTrap " << this->_name << " repairs " << amount <<\
         " points " << std::endl;
-}        
+}
+
+void    ClapTrap::initName(std::string name) 
+{
+    Name = name + "__clap_name";
+}
+
+std::string ClapTrap::Name = "";
+

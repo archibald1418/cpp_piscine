@@ -1,6 +1,7 @@
-#include "ClapTrap.hpp"
+// #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 #include <iostream>
 
 int main()
@@ -8,31 +9,21 @@ int main()
 
     std::cout << " ==== Start =====" << std::endl;
 
-    ScavTrap kek("yo mama");
-    ScavTrap kkk("yo daddy");
+    DiamondTrap diamond("diamond");
 
-    ScavTrap lol(kek);
-    lol.announce();
+    diamond.announce();
+
+    diamond.whoAmI();
+
+    diamond.getInfo();
+
+    std::string emerald("emerald");
+    diamond.attack(emerald);
+    diamond.guardGate();
+    diamond.highFivesGuys();
+
     
-    kkk.announce();
-    kek.announce();
-
-    kkk = kek;
-
-    kkk.announce();
-    kek.announce();
     
-    FragTrap five("five");
-    FragTrap six("six");
 
-    five.highFivesGuys();
-    six.highFivesGuys();
-
-    five = six;
-
-    five.highFivesGuys();
-    six.highFivesGuys();
-
-
-
+    
 }

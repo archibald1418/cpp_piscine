@@ -5,18 +5,19 @@
 # include <iostream>
 
 
-class ScavTrap :  public ClapTrap
+class ScavTrap :  public virtual ClapTrap
 {
-public:
-    ScavTrap();
-    ScavTrap(std::string name);
-    ScavTrap(const ScavTrap& other);
-    ScavTrap& operator=(const ScavTrap& other);
 
-    ~ScavTrap();
-    void    attack(std::string &target);
-    void    guardGate();
-    void    announce();
+    public:
+        ScavTrap();
+        ScavTrap(std::string name);
+        ScavTrap(const ScavTrap& other);
+        ScavTrap& operator=(const ScavTrap& other);
+
+        ~ScavTrap();
+        void    guardGate();
+        void    announce();
+        int     getEnergyPoints(void);
 };
 
 

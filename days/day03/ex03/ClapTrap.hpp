@@ -11,6 +11,8 @@ class ClapTrap
         int _energyPoints;
         int _attackDamage;
 
+        static std::string Name; 
+        static void initName(std::string);
         // For derived objects
         ClapTrap(std::string name, int hitPoints, int energyPoints, int attackDamage);
 

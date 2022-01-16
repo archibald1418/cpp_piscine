@@ -40,3 +40,8 @@ void    ScavTrap::announce()
 {
     std::cout << "ScavTrap " << _name << std::endl;
 }
+
+int     ScavTrap::getEnergyPoints(void)
+{
+    return (_energyPoints);
+}

@@ -1,5 +1,5 @@
 #include "FragTrap.hpp"
-#include "ClapTrap.hpp"
+// #include "ClapTrap.hpp"
 
 FragTrap::FragTrap(std::string name) : 
     ClapTrap(name, 
@@ -13,6 +13,11 @@ FragTrap::FragTrap(std::string name) :
 FragTrap::~FragTrap()
 {
     std::cout << "FragTrap " << _name << " destroyed" << std::endl;
+}
+
+FragTrap::FragTrap() : ClapTrap()
+{
+    std::cout << "FragTrap default" << std::endl;
 }
 
 FragTrap& FragTrap::operator=(const FragTrap &other)
@@ -31,4 +36,19 @@ void FragTrap::highFivesGuys(void)
 {
     std::cout << "FragTrap " << _name << " high fives you ";
     std::cout << " ^_^/ \\^_^ " << std::endl;
+}
+
+std::string FragTrap::getClapTrapName(void)
+{
+    return (Name);
+}
+
+int FragTrap::getHitPoints()
+{
+    return (_hitPoints);
+}
+
+int FragTrap::getAttackDamage()
+{
+    return (_attackDamage);
 }
