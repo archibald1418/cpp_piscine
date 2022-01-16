@@ -1,19 +1,23 @@
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 #include <iostream>
 
 int main()
 {
-    ClapTrap kek("kek");
-    ClapTrap lol(kek);
-    ClapTrap nameless;
+    ScavTrap kek("kek");
+
+    // ScavTrap lol("lol");
+
+    ScavTrap kkk(kek);
+
+    // ClapTrap c("C");
+
+    // lol = kek;
+
+    // lol.guardGate();
+    // kek.guardGate();
     
-    ClapTrap a("a");
-    ClapTrap b("b");
 
-    a = b;
+    // kek.attack("lol")
 
-    kek.attack("lol");
-    lol.takeDamage(42);
-
-    lol.beRepaired(21);
 }

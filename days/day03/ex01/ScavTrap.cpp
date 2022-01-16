@@ -1,8 +1,30 @@
 #include "ScavTrap.hpp"
 #include <iostream>
 
-ScavTrap::ScavTrap(std::string name) : name(name),
-    hitPoints(100), energyPoints(50), attackDamage(20)
+ScavTrap::ScavTrap(std::string name) : 
+    ClapTrap(name,
+            100,
+            50,
+            20)
 {
-    // TODO: declare protected inheritance
+    std::cout << "ScavTrap built ok" << std::endl;
+}
+
+ScavTrap::ScavTrap()
+{
+    std::cout << "ScavTrap Destroyed" << std::endl;
+}
+
+ScavTrap::~ScavTrap()
+{
+    std::cout << "ScavTrap destroyed" << std::endl;
+}
+ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other) //ClapTrap(other._name, other._hitPoints, other._energyPoints, other._attackDamage)
+{
+    std::cout << "ScavTrap copied" << std::endl;
+}
+
+void ScavTrap::guardGate()
+{
+    std::cout << "ScavTrap " << _name << " has entered in Gate keeper mode " << std::endl;
 }
