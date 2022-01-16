@@ -38,6 +38,7 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other)
     if (this == &other)
         return (*this);
     std::cout << "ClapTrap assignment" << std::endl;
+    std::cout << (*this);
     _name = other._name;
     _hitPoints = other._hitPoints;
     _energyPoints = other._energyPoints;
@@ -65,3 +66,14 @@ void ClapTrap::beRepaired(unsigned int amount)
     std::cout << "ClapTrap " << this->_name << " repairs " << amount <<\
         " points " << std::endl;
 }        
+
+std::string ClapTrap::getName()const
+{
+    return (this->_name);
+}
+
+std::ostream& operator<<(std::ostream& os, const ClapTrap& claptrap)
+{
+    std::cout << "claptrap name = " << claptrap.getName() << " at " << &claptrap <<  std::endl;
+    return (os);
+}

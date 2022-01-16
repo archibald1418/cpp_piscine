@@ -20,12 +20,15 @@ class ClapTrap
         ~ClapTrap();
         ClapTrap& operator=(const ClapTrap& other);
         ClapTrap (const ClapTrap& other);
+        std::string    getName()const;
 
         void attack(std::string const &target);
         void takeDamage(unsigned int amount);
         void beRepaired(unsigned int amount);
 };
 
+
+std::ostream& operator<<(std::ostream& os, const ClapTrap& claptrap);
 
 
 #endif

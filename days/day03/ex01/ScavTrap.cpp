@@ -33,3 +33,11 @@ void    ScavTrap::announce()
 {
     std::cout << "ScavTrap " << _name << std::endl;
 }
+
+ScavTrap& ScavTrap::operator=(const ScavTrap& other)
+{
+    std::cout << "ScavTrap assignment " << std::endl;
+    ClapTrap::operator=(other); // upcast ???
+    return (*this); 
+}
+

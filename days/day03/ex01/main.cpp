@@ -4,14 +4,15 @@
 
 int main()
 {
-    ScavTrap kek("yo mama");
-    ScavTrap kkk("yo daddy");
+    ScavTrap kek("kek");
+    ScavTrap kkk("kkk");
 
-    ScavTrap lol(kek);
-    lol.announce();
+    // ScavTrap lol(kek);
+    // lol.announce();
     
     kkk.announce();
     kek.announce();
+    
     kkk = kek;
 
     kkk.announce();
