@@ -17,11 +17,6 @@ ClapTrap::ClapTrap(std::string name) : _name(name),
 ClapTrap::ClapTrap(std::string name, int hitPoints, int energyPoints, int attackDamage) : 
     _name(name), _hitPoints(hitPoints), _energyPoints(energyPoints), _attackDamage(attackDamage)
 {
-    // _name = name;
-    // _hitPoints = hitPoints;
-    // _energyPoints = energyPoints;
-    // _attackDamage = attackDamage;
-    
     std::cout << "protected ClapTrap built ok" << std::endl;
 }
 
@@ -38,14 +33,15 @@ ClapTrap::ClapTrap(const ClapTrap& other) : _name(other._name),
     std::cout << "ClapTrap copied" << std::endl;
 }
 
-ClapTrap ClapTrap::operator=(const ClapTrap& other)
+ClapTrap& ClapTrap::operator=(const ClapTrap& other)
 {
     if (this == &other)
         return (*this);
-    
-    this->_attackDamage = other._attackDamage;
-    this->_energyPoints = other._energyPoints;
-    this->_hitPoints = other._hitPoints;
+    std::cout << "ClapTrap assignment" << std::endl;
+    _name = other._name;
+    _hitPoints = other._hitPoints;
+    _energyPoints = other._energyPoints;
+    _attackDamage = other._attackDamage;
     return (*this);
 }
 

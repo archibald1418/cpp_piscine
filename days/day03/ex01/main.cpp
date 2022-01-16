@@ -4,20 +4,17 @@
 
 int main()
 {
-    ScavTrap kek("kek");
+    ScavTrap kek("yo mama");
+    ScavTrap kkk("yo daddy");
 
-    // ScavTrap lol("lol");
-
-    ScavTrap kkk(kek);
-
-    // ClapTrap c("C");
-
-    // lol = kek;
-
-    // lol.guardGate();
-    // kek.guardGate();
+    ScavTrap lol(kek);
+    lol.announce();
     
+    kkk.announce();
+    kek.announce();
+    kkk = kek;
 
-    // kek.attack("lol")
+    kkk.announce();
+    kek.announce();
 
 }

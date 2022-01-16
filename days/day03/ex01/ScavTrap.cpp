@@ -28,3 +28,8 @@ void ScavTrap::guardGate()
 {
     std::cout << "ScavTrap " << _name << " has entered in Gate keeper mode " << std::endl;
 }
+
+void    ScavTrap::announce()
+{
+    std::cout << "ScavTrap " << _name << std::endl;
+}

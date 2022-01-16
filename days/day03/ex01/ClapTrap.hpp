@@ -18,7 +18,7 @@ class ClapTrap
         ClapTrap(std::string name);
         ClapTrap();
         ~ClapTrap();
-        ClapTrap operator=(const ClapTrap& other);
+        ClapTrap& operator=(const ClapTrap& other);
         ClapTrap (const ClapTrap& other);
 
         void attack(std::string const &target);
