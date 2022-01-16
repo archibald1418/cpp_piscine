@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Animal.hpp"
 
-class Cat : Animal
+class Cat : public virtual Animal
 {
     
 public:
@@ -9,7 +9,7 @@ public:
     ~Cat();
     Cat (const Cat& cat);
     Cat& operator=(const Cat& other);
-    virtual void makeSound(void);
+    void makeSound(void)const;
     
 };
 
