@@ -19,7 +19,6 @@ class Animal
         virtual ~Animal();
         virtual void    makeSound(void)const; // Is defined here as 0 (tobe defined later)
         virtual void    think(void)const; // Is defined in .cpp
-        
 
 };
 

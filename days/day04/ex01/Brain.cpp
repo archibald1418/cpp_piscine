@@ -40,6 +40,7 @@ Brain* Brain::clone()
 Brain::Brain()
 {
 	this->ideas = new std::string[_arraySize];
+	std::cout << "Ideas are born" << std::endl;
 }
 
 Brain::~Brain()
