@@ -1,0 +1,9 @@
+Dog brain at 0x7fb33f400690
+Dog ideas at 0x7fb33f802008
+Cat brain at 0x7fb33f4006a0
+Cat ideas at 0x7fb33f803a08
+Animal copy at 0x7ffeea7cc318
+Animal copy brain at 0x7fb33f402b70
+Animal copy ideas at 0x7fb33f804408
+Animal copy brain at 0x7fb33f402b70
+Animal copy ideas at 0x7fb33f804408
