@@ -19,6 +19,13 @@ public:
     void    getInfo();
 };
 
+class DiamondTrap
+{
+    public:
+        FragTrap FragTrap();
+        Scavtrap ScavTrap();
+}
+
 
 
 
