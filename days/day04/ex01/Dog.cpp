@@ -3,13 +3,16 @@
 Dog::Dog()
 {
     this->type = "Dog";
+    this->brain = new Brain();
+    this->brain->setIdeas("👅");
 }
 Dog::~Dog()
 {
-    
+    std::cout << "Dog killed" << std::endl;
 }
 Dog::Dog (const Dog& dog) : Animal(dog)
 {
+    std::cout << "Dog copied" << std::endl;
 }
 Dog& Dog::operator=(const Dog& other)
 {

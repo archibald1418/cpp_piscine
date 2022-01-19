@@ -1,6 +1,7 @@
 
 #ifndef ANIMAL_H
 # define ANIMAL_H
+# include "Brain.hpp"
 
 # include <iostream>
 
@@ -8,17 +9,18 @@ class Animal
 {
     protected:
         std::string type;
-    public:
-        virtual void    makeSound(void)const{};
         
-        // The method to override. "= 0" is a special syntax 
-        std::string getType(void)const{
-            return this->type;
-        };
-        Animal();
-        ~Animal();
+    public:
+        Brain *brain;
         Animal (const Animal& animal);
+        Animal();
         Animal& operator=(const Animal& other);
+        std::string getType(void)const;
+        virtual ~Animal();
+        virtual void    makeSound(void)const; // Is defined here as 0 (tobe defined later)
+        virtual void    think(void)const; // Is defined in .cpp
+        
+
 };
 
 // Interface example from nicolas
@@ -50,6 +52,3 @@ class Animal
 // }
 
 #endif
-
-
-

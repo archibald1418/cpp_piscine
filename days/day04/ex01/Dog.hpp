@@ -1,7 +1,7 @@
-#include <iostream>
-#include "Animal.hpp"
+# include <iostream>
+# include "Animal.hpp"
 
-#ifndef DOG_H
+# ifndef DOG_H
 # define DOG_H
 
 class Dog : public virtual Animal
@@ -13,10 +13,6 @@ public:
     Dog& operator=(const Dog& other);
     void makeSound(void)const;
 };
-
-
-
-
 
 #endif
 
