@@ -17,8 +17,10 @@ class Brain
 	
 		Brain& operator=(const Brain& other);
 		Brain(const Brain& other);
+		Brain* clone();
 		void	think();
 		void	setIdeas(std::string thought);
+		
 };
 
 #endif

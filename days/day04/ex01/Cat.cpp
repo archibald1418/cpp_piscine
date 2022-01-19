@@ -1,5 +1,4 @@
 #include "Cat.hpp"
-#include "Animal.hpp"
 
 Cat::Cat()
 {
@@ -13,13 +12,15 @@ Cat::~Cat()
     std::cout << "Cat killed" << std::endl;
 }
 
-Cat::Cat (const Cat& cat)
+Cat::Cat (const Cat& cat) : Animal(cat)
 {
-    *this = cat;
+    std::cout << "Cat copoied" << std::endl;
 }
 
 Cat& Cat::operator=(const Cat& other)
 {
+    if (this == &other)
+        return (*this);
     Animal::operator=(other);
     return (*this);
 }

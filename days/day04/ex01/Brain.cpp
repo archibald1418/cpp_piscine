@@ -28,6 +28,14 @@ Brain::Brain(const Brain& other)
 	*this = other;
 }
 
+Brain* Brain::clone()
+{
+	Brain* brain = new Brain();
+	if (!brain)
+		return (NULL);
+	*brain = *this;
+	return (brain);
+}
 
 Brain::Brain()
 {
