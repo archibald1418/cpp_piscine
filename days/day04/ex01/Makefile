@@ -1,7 +1,8 @@
 NAME = animal
 
 all:
-	clang++ -std=c++98 -g -Wall -Wextra -Werror *.cpp -o $(NAME) -fsanitize=address
+	clang++ -std=c++98 -g -Wall -Wextra -Werror *.cpp -o $(NAME) 
+	#-fsanitize=address
 test:
 	clang++ -std=c++98 -g -Wall -Wextra -Werror *.cpp -o test
 

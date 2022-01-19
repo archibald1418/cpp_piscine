@@ -9,4 +9,4 @@ echo "count cats";
 echo "count dogs";
 ./animal | grep -cE "^👅+"
 echo "count brains";
-./animal | grep -c "Animal brain killed"
+./animal | grep -c "brain killed"
