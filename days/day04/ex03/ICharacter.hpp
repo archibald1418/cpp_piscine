@@ -1,3 +1,7 @@
+
+#ifndef ICHARACTER_H
+# define ICHARACTER_H
+
 #include <iostream>
 
 class ICharacter
@@ -9,3 +13,5 @@ class ICharacter
     virtual void unequip(int idx) = 0;
     virtual void use(int idx, ICharacter& target) = 0;
 };
+
+#endif
