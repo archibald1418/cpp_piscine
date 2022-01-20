@@ -9,7 +9,7 @@ int main()
     // const Animal *dog = new Dog();
     // const Animal *cat = new Cat();
     
-    std::ofstream brainlog("BrainLog.txt"); 
+    std::ofstream brainlog("BrainLog.txt");
 
     const int size = 2;
     Animal *pets[size];
@@ -34,7 +34,8 @@ int main()
     // brainlog << "Animal copy at " << copy << std::endl;
     for (int i = 0; i < size; i++)
     {
-        Animal *copy = new Animal();// New copy every time
+        Animal *copy;
+        copy = new Animal();
         *copy = *pets[i];           // Tehcnicaly it's a deepcopy (=new object with cloned insides) 
         brainlog << copy->getType() + " copy at " << copy << std::endl;
 

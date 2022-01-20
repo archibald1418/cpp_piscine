@@ -15,6 +15,8 @@ Brain::Brain(std::string& thought)
 
 Brain& Brain::operator=(const Brain& other)
 {
+	if (this == &other)
+		return (*this);
 	for (int i = 0; i < _arraySize; i++)
 		this->ideas[i] = other.ideas[i];
 	std::cout << "ideas are copied" << std::endl;
@@ -24,7 +26,6 @@ Brain& Brain::operator=(const Brain& other)
 
 Brain::Brain(const Brain& other)
 {
-	delete this;
 	*this = other;
 }
 
@@ -34,6 +35,7 @@ Brain* Brain::clone()
 	if (!brain)
 		return (NULL);
 	*brain = *this;
+	std::cout << "Brain cloned" << std::endl;
 	return (brain);
 }
 
@@ -47,6 +49,7 @@ Brain::~Brain()
 {
 	std::cout << "'" + this->ideas[0] + "'" << std::endl;
 	delete [] this->ideas;
+	this->ideas = NULL;
 	std::cout << "Ideas are dead" << std::endl;
 }
 

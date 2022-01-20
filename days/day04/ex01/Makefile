@@ -13,6 +13,7 @@ clean:
 	rm -rf test
 	rm -rf $(NAME)
 	rm -rf *.dSYM/
+	rm -rf *.txt
 
 re: clean all
 re-test: clean test
