@@ -25,7 +25,7 @@ Animal& Animal::operator=(const Animal& other)
     if (this == &other) // Should probably write comparison operator for fields as well
         return (*this);
     
-    this->type = other.type; // NOTE: highlights overloaded operators
+    this->type = other.type;
     if (!other.brain)
         return (*this);
     if (this->brain)

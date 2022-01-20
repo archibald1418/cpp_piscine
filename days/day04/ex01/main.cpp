@@ -3,6 +3,7 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
 #include <fstream>
+#include <unistd.h>
 
 int main()
 {
@@ -11,13 +12,14 @@ int main()
     
     std::ofstream brainlog("BrainLog.txt");
 
-    const int size = 2;
+    const int size = 4;
     Animal *pets[size];
 
     int i = 0;
     while (i < size / 2)
     {
         pets[i] = new Dog();
+        brainlog << "Dog at" << pets[i] << std::endl;
         brainlog << "Dog brain at " << pets[i]->brain << std::endl;
         brainlog << "Dog ideas at " << pets[i]->brain->ideas << std::endl;
         i++;
@@ -26,19 +28,20 @@ int main()
     {
         pets[i] = new Cat();
         
+        brainlog << "Cat at" << pets[i] << std::endl;
         brainlog << "Cat brain at " << pets[i]->brain << std::endl;
         brainlog << "Cat ideas at " << pets[i]->brain->ideas << std::endl;
         i++;
     }
 
-    // brainlog << "Animal copy at " << copy << std::endl;
+    Animal *copies[size];
     for (int i = 0; i < size; i++)
     {
-        Animal *copy;
-        copy = new Animal();
-        *copy = *pets[i];           // Tehcnicaly it's a deepcopy (=new object with cloned insides) 
-        brainlog << copy->getType() + " copy at " << copy << std::endl;
+        Animal *copy = new Animal();
+        *copy = *pets[i];          // Tehcnicaly it's a deepcopy (=new object with cloned insides) 
+        copies[i] = copy;
 
+        brainlog << copy->getType() + " copy at " << copy << std::endl;
         brainlog << "Animal copy brain at " << copy->brain << std::endl;
         brainlog << "Animal copy ideas at " << copy->brain->ideas << std::endl;
         
@@ -46,15 +49,18 @@ int main()
         pets[i]->think();
         std::cout << copy->getType() + " copy thinks" << std::endl;
         copy->think();
-        
+    }
+
+    // Delete  all
+    for (int i = 0; i < size; i++)
+    {
         delete pets[i];
-        delete copy;
-        copy = NULL;
+        delete copies[i];
     }
     brainlog.close();
 
     
-    
+    sleep(100);
     
     // Dog *dog1 = new Dog();
 
