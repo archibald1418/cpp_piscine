@@ -10,6 +10,7 @@ Animal::~Animal()
     if (this->brain)
     {
         delete this->brain;
+        this->brain = NULL;
         std::cout << "Animal brain killed" << std::endl;
     }
     else
