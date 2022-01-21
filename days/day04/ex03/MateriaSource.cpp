@@ -62,7 +62,7 @@ AMateria* MateriaSource::createMateria(std::string const & type)
     }
     if (i == SIZE)
     {
-        std::cout << "No amateria type found" << std::endl;
+        std::cout << "No amateria type \'" << type << "\' found" << std::endl;
         return (NULL);
     }
     return this->sources[i]->clone();

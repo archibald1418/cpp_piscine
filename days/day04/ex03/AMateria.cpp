@@ -2,7 +2,7 @@
 
 AMateria::AMateria(std::string const & type) : type(type)
 {
-    std::cout << "Materia" + type + " created" << std::endl;
+    std::cout << "Materia \'" + type + "\' created" << std::endl;
 }
 
 AMateria::AMateria()

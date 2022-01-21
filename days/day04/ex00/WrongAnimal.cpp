@@ -12,7 +12,7 @@ public:
 		return *this;
 	};
 	void	makeSound()const{
-		std::cout << "Haha parent goes brrrrr" << std::endl;
+		std::cout << "Haha some animal goes brrrrr" << std::endl;
 	};
 	
 };
@@ -20,9 +20,13 @@ public:
 class WrongCat : public WrongAnimal
 {
 	public:
-		WrongCat(){
+		WrongCat()
+		{
 			std::cout << "Child created" << std::endl;
 		};
+		void	makeSound()const{
+			std::cout << "Meoooooow" << std::endl;
+		}
 };
 
 
@@ -30,7 +34,14 @@ class WrongCat : public WrongAnimal
 int main()
 {
 	const WrongAnimal *meta = new WrongAnimal();
-	const WrongAnimal *wrongCat = new WrongCat();
-	wrongCat->makeSound(); //will output the cat sound!
+	const WrongAnimal *wrongCatBad = new WrongCat();
+	const WrongCat *wrongCatGood = new WrongCat();
+	
 	meta->makeSound();
+	wrongCatBad->makeSound(); //will output the cat sound!
+	wrongCatGood->makeSound(); //will output the cat sound!
+
+	delete meta;
+	delete wrongCatBad;
+	delete wrongCatGood;
 }
