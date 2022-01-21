@@ -16,8 +16,7 @@ class Animal
         Animal& operator=(const Animal& other);
         std::string getType(void)const;
         virtual ~Animal();
-        virtual void    makeSound(void)const = 0; // Is defined here as 0 (tobe defined later)
-        virtual void    think(void)const = 0; // Is defined in .cpp
+        virtual void    think(void)const = 0; 
         virtual Brain*  getBrain()const = 0;
         virtual Animal* clone() = 0;
 
