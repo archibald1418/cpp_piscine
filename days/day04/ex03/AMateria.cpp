@@ -19,7 +19,8 @@ AMateria& AMateria::operator=(const AMateria& other)
 {
     if (this == &other)
         return (*this);
-    // TODO: implement
+    if (this->type == "")
+        this->type = other.type;
     return (*this);
 }
 
