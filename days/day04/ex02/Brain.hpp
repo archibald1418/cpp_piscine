@@ -3,11 +3,13 @@
 
 # include <iostream>
 
+#define SIZE 100
+
 class Brain
 {
 	public:
-		static int _arraySize;
 		
+		// Q: howto allow certain classes to use it?
 		std::string *ideas;
 
 		Brain(std::string& thought);
@@ -19,6 +21,7 @@ class Brain
 		Brain* clone();
 		void	think();
 		void	setIdeas(std::string thought);
+		std::string*	getIdeas();
 		
 };
 

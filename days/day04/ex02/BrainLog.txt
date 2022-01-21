@@ -1,8 +1,0 @@
-Dog brain at 0x7fa15bc02b20
-Dog ideas at 0x7fa15c002008
-Cat brain at 0x7fa15bc02b60
-Cat ideas at 0x7fa15c007a08
-Dog copy brain at 0x7fa15bc02ba0
-Dog copy ideas at 0x7fa15c008408
-Cat copy brain at 0x7fa15bc00640
-Cat copy ideas at 0x7fa15c008408

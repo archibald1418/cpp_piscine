@@ -5,22 +5,22 @@
 	Brain::Brain(std::string& thought) : Brain()
 */
 
-
 Brain::Brain(std::string& thought)
 {
-	this->ideas = new std::string[_arraySize];
-	for (int i = 0; i < _arraySize; i++)
+	this->ideas = new std::string[SIZE];
+	for (int i = 0; i < SIZE; i++)
 		this->ideas[i] = thought;
 }
 
 Brain& Brain::operator=(const Brain& other)
 {
-	for (int i = 0; i < _arraySize; i++)
+	if (this == &other)
+		return (*this);
+	for (int i = 0; i < SIZE; i++)
 		this->ideas[i] = other.ideas[i];
 	std::cout << "ideas are copied" << std::endl;
 	return *this;
 }
-
 
 Brain::Brain(const Brain& other)
 {
@@ -33,12 +33,13 @@ Brain* Brain::clone()
 	if (!brain)
 		return (NULL);
 	*brain = *this;
+	std::cout << "Brain cloned" << std::endl;
 	return (brain);
 }
 
 Brain::Brain()
 {
-	this->ideas = new std::string[_arraySize];
+	this->ideas = new std::string[SIZE];
 	std::cout << "Ideas are born" << std::endl;
 }
 
@@ -51,16 +52,18 @@ Brain::~Brain()
 }
 
 void	Brain::think(){
-	for (int i = 0; i < this->_arraySize; i++)
+	for (int i = 0; i < SIZE; i++)
 		std::cout << this->ideas[i];
 	std::cout << std::endl;
 }
 
 void	Brain::setIdeas(std::string thought)
 {
-	for (int i = 0; i < _arraySize; i++)
+	for (int i = 0; i < SIZE; i++)
 		this->ideas[i] = thought;
 }
 
-
-int Brain::_arraySize = 100;
+std::string *Brain::getIdeas()
+{
+	return (this->ideas);
+}
