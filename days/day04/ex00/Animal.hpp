@@ -9,7 +9,7 @@ class Animal
     protected:
         std::string type;
     public:
-        virtual void    makeSound(void)const{};
+        virtual void    makeSound(void)const;
         
         // The method to override. "= 0" is a special syntax 
         std::string getType(void)const{
