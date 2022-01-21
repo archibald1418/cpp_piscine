@@ -11,14 +11,15 @@ class Animal
         std::string type;
         
     public:
-        Brain *brain;
         Animal (const Animal& animal);
         Animal();
         Animal& operator=(const Animal& other);
         std::string getType(void)const;
         virtual ~Animal();
-        virtual void    makeSound(void)const; // Is defined here as 0 (tobe defined later)
-        virtual void    think(void)const; // Is defined in .cpp
+        virtual void    makeSound(void)const = 0; // Is defined here as 0 (tobe defined later)
+        virtual void    think(void)const = 0; // Is defined in .cpp
+        virtual Brain*  getBrain()const = 0;
+        virtual Animal* clone() = 0;
 
 };
 

@@ -6,12 +6,18 @@
 
 class Dog : public virtual Animal
 {
-public:
-    Dog();
-    ~Dog();
-    Dog (const Dog& dog);
-    Dog& operator=(const Dog& other);
-    void makeSound(void)const;
+    private:
+        Brain *brain;
+        std::string type;
+    public:
+        Dog();
+        ~Dog();
+        Dog (const Dog& dog);
+        Dog& operator=(const Dog& other);
+        void makeSound(void)const;
+        Brain*  getBrain()const;
+        void    think()const;
+        Dog*    clone();
 };
 
 #endif
