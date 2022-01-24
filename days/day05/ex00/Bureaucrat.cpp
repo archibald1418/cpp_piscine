@@ -16,6 +16,7 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other)
 {
     if (this == &other)
         return (*this);
+    this->grade = other.grade;
     return (*this);
 }
 
@@ -23,6 +24,16 @@ Bureaucrat::Bureaucrat(std::string name, int grade) :
     name(name){
         this->setGrade(grade);
     }
+
+void    Bureaucrat::upGrade()
+{
+    setGrade(this->grade - 1);
+}
+
+void    Bureaucrat::downGrade()
+{
+    setGrade(this->grade + 1); // NOTE: grades are 150min, 0max
+}
 
 std::string Bureaucrat::getName()const
 {
@@ -32,9 +43,24 @@ std::string Bureaucrat::getName()const
 void    Bureaucrat::setGrade(int grade)
 {
     if (grade < 0)
-        throw  GradeTooLowException();
+        throw  GradeTooHighException();
     if (grade > 150)
-        throw GradeTooHighException();
+        throw GradeTooLowException();
     this->grade = grade;
 }
 
+int     Bureaucrat::getGrade()const
+{
+    return (this->grade);
+}
+
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& b)
+{
+    os << "BUREAUCRAT" << std::endl;
+    os << std::string (15, '~') << std::endl;
+    os << std::left << "name:\t" + b.getName() << std::endl; 
+    os << std::string (15, '_') << std::endl;
+    os << std::left <<  "grade:\t" << b.getGrade() << std::endl;
+    os << std::string(15, '~') << std::endl;
+    return (os);
+}

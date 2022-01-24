@@ -1,12 +1,24 @@
 #ifndef BUREAUCRAT_H
 # define BUREAUCRAT_H
 # include <iostream>
+# include "BureaucratErrors.hpp"
 
 class Bureaucrat
 {
 private:
     const std::string   name;
     int                 grade;
+
+    class GradeTooLowException : public ABureaucratError
+    {
+        public:
+            GradeTooLowException();
+    };
+    class GradeTooHighException : public ABureaucratError
+    {
+        public:
+            GradeTooHighException();
+    };
     
 public:
     Bureaucrat();
@@ -21,8 +33,12 @@ public:
     void setGrade(int grade);
     int getGrade()const;
 
-    static void    upGrade();
-    static void    downGrade();
+    void    upGrade();
+    void    downGrade();
+
+
 };
+
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& b);
 
 #endif
