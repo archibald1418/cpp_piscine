@@ -27,11 +27,15 @@ Bureaucrat::Bureaucrat(std::string name, int grade) :
 
 void    Bureaucrat::upGrade()
 {
+    std::cout << "Grade is " << this->getGrade() << std::endl;
+    std::cout << "Up grade (-1)" << std::endl;
     setGrade(this->grade - 1);
 }
 
 void    Bureaucrat::downGrade()
 {
+    std::cout << "Grade is " << this->getGrade() << std::endl;
+    std::cout << "Down grade (+1)" << std::endl;
     setGrade(this->grade + 1); // NOTE: grades are 150min, 0max
 }
 

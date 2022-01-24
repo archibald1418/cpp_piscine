@@ -8,9 +8,9 @@ int main()
 {
     try 
     {
-        // Bureaucrat("kek", 178);
-        Bureaucrat b1("kek", 5);
-        Bureaucrat b2("lol", 150);
+        Bureaucrat b1("kek", 150);
+        Bureaucrat b2("lol", 0);
+        b2.upGrade();
         
         std::cout << b1 << std::endl;
         std::cout << b2 << std::endl;
