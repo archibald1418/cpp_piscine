@@ -9,7 +9,7 @@
 
 class Form
 {
-private:
+protected:
     const std::string name;
     const int  grade_sign;
     const int  grade_exec;
