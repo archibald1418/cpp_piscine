@@ -1,5 +1,6 @@
 #include "Bureaucrat.hpp"
 #include "BureaucratErrors.hpp"
+#include "Form.hpp"
 #include <iostream>
 
 Bureaucrat::Bureaucrat() : name(""), grade(150)
@@ -56,6 +57,31 @@ void    Bureaucrat::setGrade(int grade)
 int     Bureaucrat::getGrade()const
 {
     return (this->grade);
+}
+
+void    Bureaucrat::signForm(Form& f)
+{
+    if (f.getIsSigned())
+        return ;
+        
+    std::cout << "Bureaucrat '" << this->getName() <<\
+        "' is signing form '" << f.getName() << "'..." << std::endl;
+
+    try 
+    {
+        f.beSigned(*this);
+    }
+    catch(Form::GradeException& e)
+    {
+        std::cout << RED << "❌ Bureaucrat '" << this->getName() <<\
+            "' cannot sign form '" << f.getName() <<\
+                "' because '" << e.what() << "'" << RESET << std::endl;
+        return;
+    }
+    std::cout << GREEN << "✅ Bureaucrat " << this->getName() <<\
+        " signed form " << f.getName() << RESET << std::endl;
+        
+    
 }
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& b)
