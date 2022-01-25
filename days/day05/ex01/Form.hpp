@@ -1,6 +1,11 @@
-#include <iostream>
-#include "BureaucratErrors.hpp"
-#include "Bureaucrat.hpp"
+#ifndef FORM_H
+# define FORM_H
+
+# include <iostream>
+# include "BureaucratErrors.hpp"
+
+  class Bureaucrat;
+# include "Bureaucrat.hpp"
 
 class Form
 {
@@ -14,7 +19,6 @@ public:
     Form(std::string name);
     ~Form();
     Form();
-    ~Form();
     Form (const Form& other);
     Form& operator=(const Form& other);
     Form(std::string name, int grade_sign, int grade_exec);
@@ -27,18 +31,18 @@ public:
     
     void setIsSigned(bool is_signed);
     bool getIsSigned()const;
-    std::string Form::getName()const;
+    std::string getName()const;
     
     void    beSigned(const Bureaucrat& b);
     
-    
     // Errors
-    class GradeTooHighException : public ABureaucratError
+    class GradeException : public ABureaucratError{};
+    class GradeTooHighException : public GradeException
     {
         public: GradeTooHighException();
     };
 
-    class GradeTooLowException : public ABureaucratError
+    class GradeTooLowException : public GradeException
     {
         public: GradeTooLowException();
     };
@@ -48,3 +52,4 @@ public:
 std::ostream& operator<<(std::ostream& os, const Form& f);
 
 
+#endif

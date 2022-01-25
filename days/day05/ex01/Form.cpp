@@ -4,16 +4,16 @@
 
 Form::Form(std::string name) : 
     name(name), 
-    is_signed(false),
     grade_sign(MINGRADE),
-    grade_exec(MINGRADE)
+    grade_exec(MINGRADE),
+    is_signed(false)
 {}
 
 Form::Form() : 
     name(""), 
-    is_signed(false),
     grade_sign(MINGRADE),
-    grade_exec(MINGRADE)
+    grade_exec(MINGRADE),
+    is_signed(false)
 {}
 
 
@@ -67,7 +67,10 @@ int Form::initGradeExec(int grade)
     return (grade);
 }
 
-// Setters Getters
+/* 
+**    Setters Getters 
+*/
+
 void Form::setIsSigned(bool is_signed)
 {
     this->is_signed = is_signed;
@@ -96,20 +99,22 @@ std::string Form::getName()const
 std::ostream& operator<<(std::ostream& os, const Form& f)
 {
     os << "FORM" << std::endl;
-    os << std::string (15, '@') << std::endl;
-    os << std::left << "name:\t" + f.getName() << std::endl;
-    os << std::string (15, '_') << std::endl;
-    os << std::left << "grade:\t" << f.getGradeSign() << std::endl;
-    os << std::left << "grade:\t" << f.getGradeExec() << std::endl;
+    os << std::string (25, '@') << std::endl;
+    os << std::left << "name:\t'" + f.getName() + "'" << std::endl;
+    os << std::string (25, '_') << std::endl;
+    os << std::left << "grade sign:\t" << f.getGradeSign() << std::endl;
+    os << std::left << "grade exec:\t" << f.getGradeExec() << std::endl;
     os << ".." << std::endl;
     os << std::left << "signed:\t" << std::boolalpha << f.getIsSigned() << std::endl;
-    os << std::string(15, '@') << std::endl;
-    
+    os << std::string(25, '@') << std::endl;
+    return (os);
 }
 
 void    Form::beSigned(const Bureaucrat& b)
 {
-    if (b.getGrade() >= this->getGradeSign())
-        this->setIsSigned(true);
+    if (b.getGrade() > this->getGradeSign())
+        throw GradeTooLowException();
+    this->setIsSigned(true);
+        
 }
 
