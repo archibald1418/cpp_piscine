@@ -6,27 +6,6 @@
 # include "BureaucratErrors.hpp"
 # include "Form.hpp"
 
-const char *shrubbery = 
-"                    .o00o"
-"                   o000000oo"
-"                  00000000000o"
-"                 00000000000000"
-"              oooooo  00000000  o88o"
-"           ooOOOOOOOoo  ```''  888888"
-"         OOOOOOOOOOOO'.qQQQQq. `8888'"
-"        oOOOOOOOOOO'.QQQQQQQQQQ/.88'"
-"        OOOOOOOOOO'.QQQQQQQQQQ/ /q"
-"         OOOOOOOOO QQQQQQQQQQ/ /QQ"
-"           OOOOOOOOO `QQQQQQ/ /QQ'"
-"             OO:F_P:O `QQQ/  /Q'"
-"                \\. \ |  // |"
-"                d\ \\\|_////"
-"                qP| \\ _' `|Ob"
-"                   \  / \  \Op"
-"                   |  | O| |" 
-"           _       /\. \_/ /"
-"            `---__/|_\\   //|  __"
-"                  `-'  `-'`-'-'";
 
 class ShrubberyCreationForm : public Form
 {
@@ -41,5 +20,27 @@ public:
 };
 
 
+const std::string shrubbery =
+std::string("                    .o00o\n") + \
+std::string("                   o000000oo\n") + \
+std::string("                  00000000000o\n") + \
+std::string("                 00000000000000\n") + \
+std::string("              oooooo  00000000  o88o\n") + \
+std::string("           ooOOOOOOOoo  ```''  888888\n") + \
+std::string("         OOOOOOOOOOOO'.qQQQQq. `8888'\n") + \
+std::string("        oOOOOOOOOOO'.QQQQQQQQQQ/.88'\n") + \
+std::string("        OOOOOOOOOO'.QQQQQQQQQQ/ /q\n") + \
+std::string("         OOOOOOOOO QQQQQQQQQQ/ /QQ\n") + \
+std::string("           OOOOOOOOO `QQQQQQ/ /QQ'\n") + \
+std::string("             OO:F_P:O `QQQ/  /Q'\n") + \
+std::string("                \\. \\ |  // |\n") + \
+std::string("                d\\ \\\\|_////\n") + \
+std::string("                qP| \\ _' `|Ob\n") + \
+std::string("                   \\  / \\  \\Op\n") + \
+std::string("                   |  | O| |\n") + \
+std::string("           _       /\\. \\_/ /\n") + \
+std::string("            `---__/|_\\   //|  __\n") + \
+std::string("                  `-'  `-'`-'-'\n")
+;
 
 #endif

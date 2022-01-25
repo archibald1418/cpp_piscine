@@ -5,4 +5,5 @@ all:
 
 clean: 
 	rm -rf a.out $(NAME)
+	rm -rf *_shrubbery
 re: clean all
