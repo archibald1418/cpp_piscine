@@ -15,6 +15,9 @@ protected:
     const int  grade_exec;
     bool is_signed;
 
+    std::string target;
+
+
 public:
     Form(std::string name);
     ~Form();
@@ -34,6 +37,8 @@ public:
     std::string getName()const;
     
     void    beSigned(const Bureaucrat& b);
+
+    virtual void    execute(const Bureaucrat& executor)const = 0;
     
     // Errors
     class GradeException : public ABureaucratError{};

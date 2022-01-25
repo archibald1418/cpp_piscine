@@ -20,10 +20,17 @@ ShrubberyCreationForm::ShrubberyCreationForm(std::string target) :
         145,
         137)
 {
+    this->target = target;
+}
+
+ShrubberyCreationForm::~ShrubberyCreationForm(){}
+
+
+void ShrubberyCreationForm::execute(const Bureaucrat& executor)const
+{
     std::ofstream outfile(target + "_shrubbery");
 
     outfile.write(shrubbery.c_str(), shrubbery.length());
     outfile.close();
+    std::cout << "Shrubbery created" << std::endl;
 }
-
-ShrubberyCreationForm::~ShrubberyCreationForm(){}
