@@ -50,7 +50,7 @@ Form& Form::operator=(const Form& other)
 int Form::initGradeSign(int grade)
 {
     std::cout << "Initializing grade_sign" << std::endl;
-    if (grade < 0)
+    if (grade < 1)
         throw  GradeTooHighException();
     if (grade > 150)
         throw GradeTooLowException();
@@ -60,7 +60,7 @@ int Form::initGradeSign(int grade)
 int Form::initGradeExec(int grade)
 {
     std::cout << "Initializing grade_exec" << std::endl;
-    if (grade < 0)
+    if (grade < 1)
         throw  GradeTooHighException();
     if (grade > 150)
         throw GradeTooLowException();
