@@ -48,9 +48,9 @@ std::string Bureaucrat::getName()const
 void    Bureaucrat::setGrade(int grade)
 {
     if (grade < 1)
-        throw  GradeTooHighException();
+        throw  Bureaucrat::GradeTooHighException();
     if (grade > 150)
-        throw GradeTooLowException();
+        throw Bureaucrat::GradeTooLowException();
     this->grade = grade;
 }
 
@@ -75,7 +75,7 @@ void    Bureaucrat::signForm(Form& f)
     {
         std::cout << RED << "❌ Bureaucrat '" << this->getName() <<\
             "' cannot sign form '" << f.getName() <<\
-                "' because '" << e.what() << "'" << RESET << std::endl;
+                "' because:\n'" << e.what() << "'" << RESET << std::endl;
         return;
     }
     std::cout << GREEN << "✅ Bureaucrat " << this->getName() <<\
