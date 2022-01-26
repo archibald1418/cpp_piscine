@@ -19,12 +19,12 @@ protected:
 
 
 public:
+    Form(std::string name, int grade_sign, int grade_exec);
     Form(std::string name);
     ~Form();
     Form();
     Form (const Form& other);
     Form& operator=(const Form& other);
-    Form(std::string name, int grade_sign, int grade_exec);
 
     static int initGradeSign(int grade);
     static int initGradeExec(int grade);
@@ -38,6 +38,7 @@ public:
     
     void    beSigned(const Bureaucrat& b);
 
+    void    do_execute(const Bureaucrat& executor)const;
     virtual void    execute(const Bureaucrat& executor)const = 0;
     
     // Errors
@@ -50,6 +51,11 @@ public:
     class GradeTooLowException : public GradeException
     {
         public: GradeTooLowException();
+    };
+
+    class FormNotSignedException : public ABureaucratError
+    {
+        public: FormNotSignedException();
     };
 };
 

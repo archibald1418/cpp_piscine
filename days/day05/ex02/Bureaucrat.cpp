@@ -5,8 +5,13 @@
 
 Bureaucrat::Bureaucrat() : name(""), grade(150)
 {
+
 }
-Bureaucrat::~Bureaucrat(){}
+Bureaucrat::~Bureaucrat()
+{
+
+}
+
 Bureaucrat::Bureaucrat (const Bureaucrat& other)
 {
     *this = other;
@@ -22,9 +27,10 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other)
 }
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : 
-    name(name){
-        this->setGrade(grade);
-    }
+    name(name)
+{
+    this->setGrade(grade);
+}
 
 void    Bureaucrat::upGrade()
 {
@@ -47,10 +53,13 @@ std::string Bureaucrat::getName()const
 
 void    Bureaucrat::setGrade(int grade)
 {
-    if (grade < 1)
-        throw  GradeTooHighException();
-    if (grade > 150)
-        throw GradeTooLowException();
+        if (grade < 1)
+            throw  Bureaucrat::GradeTooHighException();
+        if (grade > 150)
+            throw Bureaucrat::GradeTooLowException();
+        
+    
+
     this->grade = grade;
 }
 
@@ -64,7 +73,7 @@ void    Bureaucrat::signForm(Form& f)
     if (f.getIsSigned())
         return ;
         
-    std::cout << "Bureaucrat '" << this->getName() <<\
+    std::cout << std::endl << "Bureaucrat '" << this->getName() <<\
         "' is signing form '" << f.getName() << "'..." << std::endl;
 
     try 
@@ -75,12 +84,31 @@ void    Bureaucrat::signForm(Form& f)
     {
         std::cout << RED << "❌ Bureaucrat '" << this->getName() <<\
             "' cannot sign form '" << f.getName() <<\
-                "' because '" << e.what() << "'" << RESET << std::endl;
+                "' because: \n'" << e.what() << "'" << RESET << std::endl;
         return;
     }
-    std::cout << GREEN << "✅ Bureaucrat " << this->getName() <<\
-        " signed form " << f.getName() << RESET << std::endl;
+    std::cout << GREEN << "✅ Bureaucrat '" << this->getName() <<\
+        "' signed form " << f.getName() << RESET << std::endl;
         
+    
+}
+
+void    Bureaucrat::executeForm(const Form& form)
+{
+    try 
+    {
+        form.do_execute(*this);
+    }
+    catch(Form::GradeException& e)
+    {
+        std::cout << RED << "❌ Bureaucrat '" << this->getName() << "'" << " cannot execute form '" << form.getName() <<\
+        "' because:\n" << BOLD << e.what() <<  RESET << std::endl;
+    }
+    catch(Form::FormNotSignedException& e)
+    {
+        std::cout << RED << "❌ Bureaucrat '" << this->getName() << "'" << " cannot execute form '" << form.getName() <<\
+        "' because:\n" << BOLD << e.what() <<  RESET << std::endl;
+    }
     
 }
 

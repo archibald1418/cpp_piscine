@@ -15,9 +15,10 @@
 #define MAGENTA "\033[35m"      /* Magenta */
 #define CYAN    "\033[36m"      /* Cyan */
 #define WHITE   "\033[37m"      /* White */
+#define BOLD    "\e[1m"
 
 #define MINGRADE 150
-#define MAXGRADE 0
+#define MAXGRADE 1
 
 class ABureaucratError : public std::exception
     {

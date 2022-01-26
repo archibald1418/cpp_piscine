@@ -6,4 +6,5 @@ all:
 clean: 
 	rm -rf a.out $(NAME)
 	rm -rf *_shrubbery
+	rm -rf *.dSYM/
 re: clean all

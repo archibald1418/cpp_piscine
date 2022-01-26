@@ -118,3 +118,26 @@ void    Form::beSigned(const Bureaucrat& b)
         
 }
 
+void    Form::do_execute(const Bureaucrat& executor)const
+{
+    std::cout << std::endl <<  "Executor '" << executor.getName() << "' is executing '" << this->getName() << "'..." << std::endl;
+
+    // Check if signed
+    if (this->getIsSigned() == false)
+        throw Form::FormNotSignedException();
+
+    // Attempt to execute
+    if (executor.getGrade() > this->grade_exec)
+        throw Form::GradeTooLowException();
+
+    this->execute(executor);
+    std::cout << GREEN << "✅ Executor '" << executor.getName() << "' has executed '" << this->getName() << "'" << RESET << std::endl;
+    std::cout << std::endl;
+    std::cout << *this << std::endl;
+}
+
+// void    Form::execute(const Bureaucrat& executor)const
+// {
+
+// }
+

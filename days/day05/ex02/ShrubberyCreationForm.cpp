@@ -28,6 +28,8 @@ ShrubberyCreationForm::~ShrubberyCreationForm(){}
 
 void ShrubberyCreationForm::execute(const Bureaucrat& executor)const
 {
+    (void)executor;
+    
     std::ofstream outfile(target + "_shrubbery");
 
     outfile.write(shrubbery.c_str(), shrubbery.length());
