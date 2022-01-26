@@ -9,14 +9,15 @@ int main()
     try 
     {
         Bureaucrat b1("kek", 150);
-        Bureaucrat b2("lol", 0);
+        Bureaucrat b2("lol", 1);
+        
         b2.upGrade();
         
         std::cout << b1 << std::endl;
         std::cout << b2 << std::endl;
         
     }
-    catch(const Exception& e)
+    catch(Exception& e)
     {
         std::cout << e.what() << std::endl;
     }
