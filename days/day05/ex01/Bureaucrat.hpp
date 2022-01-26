@@ -3,24 +3,28 @@
 # include <iostream>
 # include "BureaucratErrors.hpp"
 
+class Form;
+# include "Form.hpp"
+
 class Bureaucrat
 {
+    
 private:
     const std::string   name;
     int                 grade;
-
-    class GradeTooLowException : public ABureaucratError
+public:
+    class GradeException : public ABureaucratError{};
+    class GradeTooLowException : public GradeException
     {
         public:
             GradeTooLowException();
     };
-    class GradeTooHighException : public ABureaucratError
+    class GradeTooHighException : public GradeException
     {
         public:
             GradeTooHighException();
     };
     
-public:
     Bureaucrat();
     ~Bureaucrat();
     Bureaucrat (const Bureaucrat& other);
@@ -35,6 +39,10 @@ public:
 
     void    upGrade();
     void    downGrade();
+    void    signForm(Form& f);
+
+
+
 
 
 };
