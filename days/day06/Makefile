@@ -1,5 +1,5 @@
-NAME =
-
 all:
-	clang++ -std=c++98 -Wall -Wextra -Werror *.cpp -o $(NAME)
-
+	clang++ -g -Wall -Wextra -Werror *.cpp
+clean:
+	rm -rf *.dSYM/
+	rm -rf a.out test
