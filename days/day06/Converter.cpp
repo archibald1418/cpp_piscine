@@ -59,13 +59,8 @@ void    Converter::convertPrintFloat()const
     bool plus = this->_num > 1e-8;
 
     std::cout << "float: ";
-    if (((std::fabs(this->_num - std::numeric_limits<float>::max()) < 1e-8) || \
-        (std::fabs(this->_num - std::numeric_limits<float>::min() < 1e-8))) && \
-        ((!std::isnan(static_cast<float>(this->_num))) && \
-        !std::isinf(static_cast<float>(this->_num))))
-        throw Impossible();
-    else if (std::isnan(static_cast<float>(this->_num)))
-        std::cout << "nanf" << std::endl;
+    if (std::isnan(static_cast<float>(this->_num)))
+        std::cout << "nan";
     else if (std::isinf(static_cast<float>(this->_num)))
     {
         if (minus)
@@ -74,8 +69,14 @@ void    Converter::convertPrintFloat()const
             std::cout << "+";
         std::cout << "inf";
     }
-    else
-        std::cout << static_cast<float>(this->_num);
+    else 
+    {
+        if (((std::fabs(this->_num - std::numeric_limits<float>::max()) < 1e-8) || \
+            (std::fabs(this->_num - std::numeric_limits<float>::min() < 1e-8))))
+            throw Impossible();
+        else 
+            std::cout << static_cast<float>(this->_num);
+    }
     std::cout << "f" << std::endl;
 }
 
@@ -87,7 +88,7 @@ void    Converter::convertPrintDouble()const
     std::cout << "double: ";
     if (std::isnan(static_cast<double>(this->_num)))
         std::cout << "nan";
-    if (std::isinf(static_cast<double>(this->_num)))
+    else if (std::isinf(static_cast<double>(this->_num)))
     {
         if (minus)
             std::cout << "-";
@@ -95,12 +96,13 @@ void    Converter::convertPrintDouble()const
             std::cout << "+";
         std::cout << "inf";
     }
-    else if ( 
-        ((std::fabs(this->_num - std::numeric_limits<double>::max()) < 1e-14) || \
-        (std::fabs(this->_num - std::numeric_limits<double>::min() < 1e-14))))
+    else {
+        if (((std::fabs(this->_num - std::numeric_limits<double>::max()) < 1e-14) || \
+            (std::fabs(this->_num - std::numeric_limits<double>::min() < 1e-14))))
             throw Impossible();
-    else
-        std::cout << static_cast<double>(this->_num);
+        else
+            std::cout << static_cast<double>(this->_num);
+    }
     
     std::cout << std::endl;
 }
