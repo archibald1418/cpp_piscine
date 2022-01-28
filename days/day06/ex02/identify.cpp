@@ -7,7 +7,14 @@
 
 void identify(Base* p)
 {
-    std::cout << *p;
+    if (dynamic_cast<A*>(p) != NULL)
+        std::cout << *dynamic_cast<A*>(p);
+    else if (dynamic_cast<B*>(p) != NULL)
+        std::cout << *dynamic_cast<B*>(p);
+    else if (dynamic_cast<C*>(p) != NULL)
+        std::cout << *dynamic_cast<C*>(p);
+    else
+        std::cout << "Ха лох!";
 }
 
 void identify(Base& p)

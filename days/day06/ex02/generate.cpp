@@ -5,34 +5,43 @@
 
 #include <cstdlib>
 #include <time.h>
+#include <limits>
 
 enum children{
-    a,
-    b,
-    c
+    a = 0,
+    b = 1,
+    c = 2
 } children;
 
 
-// TODO: try const array of references
+
 
 Base*   generate(void)
 {
     std::srand(time(NULL));
 
-    int upper = 2;
-    int lower = 0;
-    int index = (std::rand() % (upper - lower ) + lower);
+    int index = rand() % 3;
 
-    Base *obj;
+    Base *obj = NULL;
 
-    switch (index)
-    {
-        case a:
-            obj = new A();
-        case b:
-            obj = new B();
-        case c:
-            obj = new C();
+    if (index == a)
+    {        
+        obj = new A();
+        std::cerr << "*A chosen*\n";
     }
+    else if (index == b)
+    {
+        obj = new B();
+        std::cerr << "*B chosen*\n";
+    }
+    else if (index == c)
+    {    
+        obj = new C(); 
+        std::cerr << "*C chosen*\n";
+    }
+    else
+        std::cerr << "Unknown index";
+
+    
     return (obj);
 }
