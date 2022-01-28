@@ -12,5 +12,9 @@ int main()
     // Black box
     Base* randomObject = generate();
 
+    std::cout << "Ищем по пойнтеру: " << std::endl;
     identify(randomObject);
+    std::cout << "Ищем по ссылке: " << std::endl;
+    identify(*randomObject);
+    delete randomObject;
 }

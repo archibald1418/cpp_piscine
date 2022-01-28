@@ -23,25 +23,24 @@ Base*   generate(void)
     int index = rand() % 3;
 
     Base *obj = NULL;
-
+    
     if (index == a)
     {        
         obj = new A();
-        std::cerr << "*A chosen*\n";
+        std::cerr << "*A случайно выбран*\n";
     }
     else if (index == b)
     {
         obj = new B();
-        std::cerr << "*B chosen*\n";
+        std::cerr << "*B случайно выбран*\n";
     }
     else if (index == c)
     {    
         obj = new C(); 
-        std::cerr << "*C chosen*\n";
+        std::cerr << "*C случайно выбран*\n";
     }
     else
         std::cerr << "Unknown index";
-
     
     return (obj);
 }
