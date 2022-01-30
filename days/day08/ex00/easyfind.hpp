@@ -59,4 +59,11 @@ const typename T::iterator easyfind(const T& container, int n)
             throw NotFound("Number " + std::to_string(n) + " not found");
     return (it);
 }
+
+// template < typename T >
+// typename T::iterator iter_cast(typename T::iterator& iter)
+// {
+    
+// }
+
 #endif
