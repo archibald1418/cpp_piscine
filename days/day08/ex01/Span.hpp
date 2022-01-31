@@ -8,6 +8,11 @@
 #include <iostream>
 #include <vector>
 
+// #define INT_MIN std::numeric_limits<int>::min()
+// #define INT_MAX std::numeric_limits<int>::max()
+
+
+
 class SpanIsFull : public std::exception
 {
     public:
@@ -36,6 +41,17 @@ private:
     std::vector<int>numbers;
 
 public:
+
+    const std::vector<int>& getNumbers()const
+    {
+        return (this->numbers);
+    }
+
+    unsigned int getNum()const
+    {
+        return (this->num);
+    }
+
     Span() : num(1)
     {
         throw SpanIsSmall();
@@ -80,7 +96,7 @@ public:
 
     std::pair<int , int> longestSpan()
     {
-        std::pair<int, int>PAIR = std::make_pair(INT_MIN, 0);
+        std::pair<int, int>PAIR = std::make_pair(0, 0);
 
         for (int i = 0; i < static_cast<int>(this->num); i++)
         {
