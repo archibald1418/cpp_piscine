@@ -11,5 +11,5 @@
 #####   - include guards
 
 ### More on snippets in vscode: 
-##### - [VSCode documentation on that](https://macromates.com/manual/en/snippets)
+##### - [VSCode documentation on that](https://code.visualstudio.com/docs/editor/userdefinedsnippets)
 ##### - [TextMate syntax docs](https://macromates.com/manual/en/snippets) (It's great, you should really check it out)
