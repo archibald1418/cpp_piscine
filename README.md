@@ -8,8 +8,8 @@
 
 ### vscode snippets
 #### Text-MATE snippets for vscode:
-##### - coplien form + prototypes
-##### - getters and setters + prototypes
+#####   - coplien form + prototypes
+#####   - getters and setters + prototypes
 
 #### More on snippets in vscode: 
 ##### - [VSCode documentation on that](https://macromates.com/manual/en/snippets)
