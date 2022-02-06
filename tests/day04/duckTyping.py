@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 import typing 
 
 class Animal:
@@ -22,4 +23,4 @@ another_pet.say() # prints "meow"
 
 my_pets = [pet, another_pet]
 for a_pet in my_pets:
-  a_pet.say()
+  a_pet.say() # Python doesn't care for type, he just calls if it's there''
