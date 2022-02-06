@@ -105,7 +105,7 @@ public:
             {
                 if (i != j && \
                     std::abs(this->numbers[i] - this->numbers[j]) <
-                    std::abs(PAIR.first - std::abs(PAIR.second)))
+                    std::abs(PAIR.first - PAIR.second))
                     PAIR = std::make_pair(this->numbers[i], this->numbers[j]);
             }
         }
