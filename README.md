@@ -5,9 +5,10 @@
 ##### Tasks for a specific day can be seen inside a .pdf file
 
 ### vscode snippets
-#### Text-MATE snippets for vscode:
+#### Text-MATE snippets for vscode using actual filenames:
 #####   - coplien form + prototypes
 #####   - getters and setters + prototypes
+#####   - include guards
 
 ### More on snippets in vscode: 
 ##### - [VSCode documentation on that](https://macromates.com/manual/en/snippets)
