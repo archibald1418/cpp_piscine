@@ -1,0 +1,115 @@
+{
+	"Include guard":{
+		"prefix": ["ifn", "guard", "include_guard", "include"],
+		"body": [
+			"#ifndef ${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_H",
+			"# define ${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_H\n",
+			"$0\n",
+			"#endif"
+		]
+	},
+	"Setter":{
+		"prefix": ["setter", "Setter"],
+		"body": [
+			"void $TM_FILENAME_BASE::set${3:/*argName*/}(${2:/*argType*/} ${4:/*argName*/})", // Selecting text and setting its cursor
+			"{",
+			"\tthis->${4:/*arg_name*/} = ${4:/*argName*/};",
+			"}\n",
+		]
+	},
+	"Getter":{
+		"prefix": ["Getter", "getter"],
+		"body": [
+			"${2:/*argType*/} $TM_FILENAME_BASE::get${3:/*argName*/}()const",
+			"{",
+			"\treturn (this->${4:/*arg_name*/});",
+			"}"
+		]
+	},
+	"GetterPrototype":{
+		"prefix": ["getter_prototype", "Getter_prototype", "prototye_getter"],
+		"body": "${3:/*argType*/} get${4:/*argName*/}()const;\n"
+	},
+	"SetterPrototype":{
+		"prefix": ["setter_prototype", "Setter_prototype", "prototype_setter"],
+		"body": "void set${2:/*argName*/}(${3:/*argType*/} ${4:/*argName*/});\n"
+	},
+	"Getset_prototype":{
+		"prefix":["getset_prototype", "prototype_getset"],
+		"body":[
+			"void set${2:/*argName*/}(${3:/*argType*/} ${4:/*argName*/});",
+			"${3:/*argType*/} get${2:/*argName*/}()const;"
+		]
+	},
+	"Getset":{
+		"prefix":	["Getset", "GetterSetter", "SetterGetter"],
+		"body": [
+			"void $TM_FILENAME_BASE::set${3:/*argName*/}(${2:/*argType*/} ${4:/*argName*/})", // Selecting text and setting its cursor
+			"{",
+			"\tthis->${4:/*arg_name*/} = ${4:/*argName*/};",
+			"}\n",
+			"${2:/*argType*/} $TM_FILENAME_BASE::get${3:/*argName*/}()const",
+			"{",
+			"\treturn (this->${4:/*arg_name*/});",
+			"}"
+		]
+	},
+	"Coplien Form Prototype": {
+		"prefix": ["CoplienPrototype", "coplienPrototype"],
+		"body": [
+			"$TM_FILENAME_BASE();",
+			"~$TM_FILENAME_BASE();",
+			"$TM_FILENAME_BASE (const $TM_FILENAME_BASE& other);",
+			"$TM_FILENAME_BASE& operator=(const $TM_FILENAME_BASE& other);",
+		]	
+	},
+	"Coplien Form": {
+		"prefix": ["Coplien", "coplien", "coplien form"],
+		"body": [
+			"$TM_FILENAME_BASE::$TM_FILENAME_BASE()",
+			"{",
+			"\t",
+			"}",
+			"$TM_FILENAME_BASE::~$TM_FILENAME_BASE()",
+			"{",
+			"\t",
+			"}",
+			"$TM_FILENAME_BASE::$TM_FILENAME_BASE (const $TM_FILENAME_BASE& other)",
+			"{",
+			"\t*this = other;",
+			"}",
+			"$TM_FILENAME_BASE& $TM_FILENAME_BASE::operator=(const $TM_FILENAME_BASE& other)",
+			"{",
+			"\tif (this == &other)\n\t\treturn (*this);",
+			"\treturn (*this);",
+			"}"
+		]
+	},
+	"template_function": {
+		"prefix": ["template", "Template", "template_function", "templateFunction"],
+		"body":[
+			"template< typename T>",
+			"const T& ${1:/*func*/}(${2:/*args*/})",
+			"{",
+			"\t${3:/*body*/}",
+			"\treturn (${4:/*retval*/})",
+			"}"
+		]
+	}
+
+
+
+	// Place your snippets for cpp here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+}
